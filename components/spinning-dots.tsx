@@ -255,45 +255,32 @@ export function SpinningDots() {
       </div>
 
       <div className="relative w-[500px] h-[500px]">
-        <svg
-          viewBox="0 0 500 500"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full"
-          style={{ filter: "url(#goo)" }}
+        <div
+          className={`absolute inset-0 transition-all duration-[600ms] ease-in-out ${
+            hoveredIndex === null ? "animate-spin-normal" : "animate-spin-stopped"
+          }`}
         >
-          <defs>
-            <filter id="goo">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-              <feColorMatrix
-                in="blur"
-                mode="matrix"
-                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
-                result="goo"
+          {dots.map((dot, index) => {
+            const x = 250 + Math.cos((dot.angle * Math.PI) / 180) * 180
+            const y = 250 + Math.sin((dot.angle * Math.PI) / 180) * 180
+            return (
+              <div
+                key={index}
+                className="absolute w-[60px] h-[60px] rounded-full cursor-pointer transition-all duration-500 ease-in-out"
+                style={{
+                  left: `${x}px`,
+                  top: `${y}px`,
+                  transform: "translate(-50%, -50%)",
+                  background: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+                  opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
+                  scale: hoveredIndex !== null && hoveredIndex !== index ? 0.4 : 1,
+                }}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
               />
-              <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-            </filter>
-          </defs>
-          {dots.map((dot, index) => (
-            <circle
-              key={index}
-              className={`transition-all duration-500 cursor-pointer ${hoveredIndex === null ? "animate-morph-blob" : ""}`}
-              style={{
-                fill: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
-                opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
-                transform: hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)",
-                transformOrigin: "center",
-                transition:
-                  "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1), fill 500ms ease-in-out",
-                animationDelay: `${index * 0.1}s`,
-              }}
-              cx={250 + Math.cos((dot.angle * Math.PI) / 180) * 180}
-              cy={250 + Math.sin((dot.angle * Math.PI) / 180) * 180}
-              r="30"
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            />
-          ))}
-        </svg>
+            )
+          })}
+        </div>
       </div>
 
       {showImage && currentImageIndex !== null && (
