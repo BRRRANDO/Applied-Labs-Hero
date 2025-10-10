@@ -93,6 +93,8 @@ export function SpinningDots() {
   const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(null)
   const [isMainButtonHovered, setIsMainButtonHovered] = useState(false)
   const [isNavButtonHovered, setIsNavButtonHovered] = useState(false)
+  const [parallaxOffset, setParallaxOffset] = useState({ x: 0, y: 0 })
+
   useEffect(() => {
     const updateViewportSize = () => setViewportSize({ width: window.innerWidth, height: window.innerHeight })
     updateViewportSize()
@@ -122,7 +124,23 @@ export function SpinningDots() {
       }, 150)
     }
   }, [hoveredIndex])
-  const handleMouseMove = (e: React.MouseEvent) => setMousePosition({ x: e.clientX, y: e.clientY })
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setMousePosition({ x: e.clientX, y: e.clientY })
+
+    // Calculate offset from center (inverted for parallax effect)
+    const centerX = viewportSize.width / 2
+    const centerY = viewportSize.height / 2
+    const offsetX = (e.clientX - centerX) / centerX // Normalized -1 to 1
+    const offsetY = (e.clientY - centerY) / centerY // Normalized -1 to 1
+
+    // Apply subtle parallax movement (opposite direction, scaled down)
+    const parallaxStrength = 15 // pixels of maximum movement
+    setParallaxOffset({
+      x: -offsetX * parallaxStrength,
+      y: -offsetY * parallaxStrength,
+    })
+  }
+
   const getGradientBackground = () => {
     if (hoveredIndex === null) return "white"
     const dot = dots[hoveredIndex]
@@ -254,35 +272,30 @@ export function SpinningDots() {
         </button>
       </div>
 
-      <div className="relative w-[500px] h-[500px]">
-        <div
-          className={`absolute inset-0 transition-all duration-[600ms] ease-in-out ${
-            hoveredIndex === null ? "animate-spin-normal" : "animate-spin-stopped"
-          }`}
-        >
-          {dots.map((dot, index) => {
-            const x = 250 + Math.cos((dot.angle * Math.PI) / 180) * 180
-            const y = 250 + Math.sin((dot.angle * Math.PI) / 180) * 180
-            return (
-              <div
-                key={index}
-                className="absolute w-[60px] h-[60px] rounded-full cursor-pointer transition-all duration-500 ease-in-out"
-                style={{
-                  left: `${x}px`,
-                  top: `${y}px`,
-                  transform: "translate(-50%, -50%)",
-                  background: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
-                  opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
-                  scale: hoveredIndex !== null && hoveredIndex !== index ? 0.4 : 1,
-                }}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              />
-            )
-          })}
-        </div>
+      <div
+        className={`relative w-[650px] h-[650px] ${hoveredIndex !== null ? "animate-spin-stopped" : "animate-spin-normal"}`}
+        style={{
+          transformOrigin: "50% 50%",
+          transform: `translate(${parallaxOffset.x}px, ${parallaxOffset.y}px)`,
+          transition: "transform 0.3s ease-out",
+        }}
+      >
+        {dots.map((dot, index) => (
+          <div
+            key={index}
+            className="absolute w-5 h-5 rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer"
+            style={{
+              backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+              transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(315px, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
+              transformOrigin: "center",
+              opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
+              transition: "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1)",
+            }}
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          />
+        ))}
       </div>
-
       {showImage && currentImageIndex !== null && (
         <div
           className="fixed pointer-events-none z-20"
