@@ -439,8 +439,12 @@ export function SpinningDots() {
         <div className="overflow-hidden" style={{ height: "22px", width: "320px" }}>
           <div className="relative w-full h-full">
             <div className="absolute inset-0 flex items-center animate-logo-scroll-faster" style={{ opacity: 0.8 }}>
-              {[...Array(2)].map((_, setIndex) => (
-                <div key={setIndex} className="flex items-center shrink-0" style={{ gap: "40px" }}>
+              {[...Array(3)].map((_, setIndex) => (
+                <div
+                  key={setIndex}
+                  className="flex items-center shrink-0"
+                  style={{ gap: "40px", paddingRight: "40px" }}
+                >
                   <img
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Scale_AI-3%201-vcqdaUAC6t03sXBRsLCtkf0VLbOw6d.png"
                     alt="Scale AI"

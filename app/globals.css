@@ -190,7 +190,7 @@
   }
 
   .animate-logo-scroll-faster {
-    animation: logo-scroll 20.58s linear infinite;
+    animation: logo-scroll 30.87s linear infinite;
   }
 
   .animate-gradient-shift {
@@ -223,7 +223,7 @@
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-50%);
+      transform: translateX(-33.333%);
     }
   }
 
