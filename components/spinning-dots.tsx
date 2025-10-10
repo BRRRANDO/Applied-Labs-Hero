@@ -94,6 +94,7 @@ export function SpinningDots() {
   const [isMainButtonHovered, setIsMainButtonHovered] = useState(false)
   const [isNavButtonHovered, setIsNavButtonHovered] = useState(false)
   const [parallaxOffset, setParallaxOffset] = useState({ x: 0, y: 0 })
+  const [isCtaHovered, setIsCtaHovered] = useState(false)
 
   useEffect(() => {
     const updateViewportSize = () => setViewportSize({ width: window.innerWidth, height: window.innerHeight })
@@ -265,8 +266,14 @@ export function SpinningDots() {
             gap: "10px",
             transition: "background 400ms ease-in-out",
           }}
-          onMouseEnter={() => setIsMainButtonHovered(true)}
-          onMouseLeave={() => setIsMainButtonHovered(false)}
+          onMouseEnter={() => {
+            setIsMainButtonHovered(true)
+            setIsCtaHovered(true)
+          }}
+          onMouseLeave={() => {
+            setIsMainButtonHovered(false)
+            setIsCtaHovered(false)
+          }}
         >
           GET DEMO
         </button>
@@ -279,7 +286,7 @@ export function SpinningDots() {
         }}
       >
         <div
-          className={`relative w-[650px] h-[650px] ${hoveredIndex !== null ? "animate-spin-stopped" : "animate-spin-normal"}`}
+          className={`relative w-[650px] h-[650px] ${hoveredIndex !== null || isCtaHovered ? "animate-spin-stopped" : "animate-spin-normal"}`}
           style={{
             transformOrigin: "50% 50%",
           }}
@@ -289,11 +296,12 @@ export function SpinningDots() {
               key={index}
               className="absolute w-5 h-5 rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer"
               style={{
-                backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
-                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(315px, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
+                backgroundColor: isCtaHovered ? "#3168FF" : `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(${isCtaHovered ? "200px" : "315px"}, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
                 transformOrigin: "center",
                 opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
-                transition: "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1)",
+                transition:
+                  "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 400ms ease-in-out",
               }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
