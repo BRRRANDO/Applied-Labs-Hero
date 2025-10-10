@@ -273,29 +273,35 @@ export function SpinningDots() {
       </div>
 
       <div
-        className={`relative w-[650px] h-[650px] ${hoveredIndex !== null ? "animate-spin-stopped" : "animate-spin-normal"}`}
         style={{
-          transformOrigin: "50% 50%",
           transform: `translate(${parallaxOffset.x}px, ${parallaxOffset.y}px)`,
           transition: "transform 0.3s ease-out",
         }}
       >
-        {dots.map((dot, index) => (
-          <div
-            key={index}
-            className="absolute w-5 h-5 rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer"
-            style={{
-              backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
-              transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(315px, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
-              transformOrigin: "center",
-              opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
-              transition: "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1)",
-            }}
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          />
-        ))}
+        <div
+          className={`relative w-[650px] h-[650px] ${hoveredIndex !== null ? "animate-spin-stopped" : "animate-spin-normal"}`}
+          style={{
+            transformOrigin: "50% 50%",
+          }}
+        >
+          {dots.map((dot, index) => (
+            <div
+              key={index}
+              className="absolute w-5 h-5 rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer"
+              style={{
+                backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(315px, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
+                transformOrigin: "center",
+                opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
+                transition: "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1)",
+              }}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            />
+          ))}
+        </div>
       </div>
+
       {showImage && currentImageIndex !== null && (
         <div
           className="fixed pointer-events-none z-20"
