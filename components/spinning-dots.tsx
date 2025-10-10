@@ -431,16 +431,27 @@ export function SpinningDots() {
           <div className="relative w-full h-full">
             <div className="absolute inset-0 flex items-center animate-logo-scroll-faster" style={{ opacity: 0.8 }}>
               {[...Array(2)].map((_, setIndex) => (
-                <div
-                  key={setIndex}
-                  className="flex items-center shrink-0 font-neue-montreal font-normal"
-                  style={{ fontSize: "22px" }}
-                >
-                  {["Google", "Meta", "Stanford", "MIT", "Apple", "Microsoft", "Berkeley", "Amazon"].map((logo) => (
-                    <span key={logo} style={{ marginRight: "40px", color: "#000000" }}>
-                      {logo}
-                    </span>
-                  ))}
+                <div key={setIndex} className="flex items-center shrink-0" style={{ gap: "40px" }}>
+                  <img
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chanel-logo-png-transparent-u4Ka6m6HcTzSa9bm9arvGYxP0m67c3.png"
+                    alt="Chanel"
+                    className="h-[22px] w-auto object-contain"
+                  />
+                  <img
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/amazon-logo-black-transparent-xXBDpoSsInIWhmQx7tfXtfTziNspfv.png"
+                    alt="Amazon"
+                    className="h-[22px] w-auto object-contain"
+                  />
+                  <img
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/prada-logo-black-and-white-2%201-q8B8evJcNHpUZsGNt79Pus6EuJTyYr.png"
+                    alt="Prada"
+                    className="h-[22px] w-auto object-contain"
+                  />
+                  <img
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/microsoft-logo-white-transparent_2166875-tnXe0G2DSF3D2sL2SBYzlDABKITOY4.png"
+                    alt="Microsoft"
+                    className="h-[22px] w-auto object-contain"
+                  />
                 </div>
               ))}
             </div>
