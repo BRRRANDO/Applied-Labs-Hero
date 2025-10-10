@@ -196,14 +196,14 @@ export function SpinningDots() {
       >
         <div className="flex items-center justify-between text-sm">
           <div
-            className="font-decimal text-[15px] font-medium leading-[130%]"
-            style={{ color: textColor, transition: "color 500ms ease-out" }}
+            className="font-decimal text-[15px] font-medium leading-[130%] transition-colors duration-500 ease-out"
+            style={{ color: isCtaHovered ? "#3168FF" : textColor }}
           >
             APPLIED LABS
           </div>
           <div
             className="flex items-center transition-opacity duration-500 ease-out"
-            style={{ gap: "24px", opacity: hoveredIndex !== null ? 0 : 1 }}
+            style={{ gap: "24px", opacity: hoveredIndex !== null ? 0 : isCtaHovered ? 0.2 : 1 }}
           >
             {["Product", "Industries", "Customers", "Company"].map((item) => (
               <span
@@ -222,7 +222,7 @@ export function SpinningDots() {
             style={{
               color: isNavButtonHovered ? "#3168FF" : textColor,
               transition: "color 400ms ease-in-out, opacity 500ms ease-out",
-              opacity: hoveredIndex !== null ? 0 : 1,
+              opacity: hoveredIndex !== null ? 0 : isCtaHovered ? 0.2 : 1,
             }}
             onMouseEnter={() => setIsNavButtonHovered(true)}
             onMouseLeave={() => setIsNavButtonHovered(false)}
@@ -329,8 +329,8 @@ export function SpinningDots() {
         </div>
       )}
       <div
-        className="fixed z-[100] transition-opacity duration-300 ease-out"
-        style={{ bottom: "40px", left: "32px", opacity: hoveredIndex !== null ? 0 : 1 }}
+        className="fixed z-[100] transition-opacity duration-500 ease-out"
+        style={{ bottom: "40px", left: "32px", opacity: hoveredIndex !== null ? 0 : isCtaHovered ? 0.2 : 1 }}
       >
         <p className="font-neue-montreal font-normal text-xs mb-[28px]" style={{ color: "#000000" }}>
           Trusted by thousands of customers of leading brands
@@ -356,18 +356,24 @@ export function SpinningDots() {
             </div>
             <div
               className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"
-              style={{ opacity: hoveredIndex !== null ? 0 : 1, transition: "opacity 300ms ease-out" }}
+              style={{
+                opacity: hoveredIndex !== null ? 0 : isCtaHovered ? 0.2 : 1,
+                transition: "opacity 300ms ease-out",
+              }}
             />
             <div
               className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"
-              style={{ opacity: hoveredIndex !== null ? 0 : 1, transition: "opacity 300ms ease-out" }}
+              style={{
+                opacity: hoveredIndex !== null ? 0 : isCtaHovered ? 0.2 : 1,
+                transition: "opacity 300ms ease-out",
+              }}
             />
           </div>
         </div>
       </div>
       <div
-        className="fixed z-[100] transition-opacity duration-300 ease-out"
-        style={{ bottom: "40px", right: "32px", opacity: hoveredIndex !== null ? 0 : 1 }}
+        className="fixed z-[100] transition-opacity duration-500 ease-out"
+        style={{ bottom: "40px", right: "32px", opacity: hoveredIndex !== null ? 0 : isCtaHovered ? 0.2 : 1 }}
       >
         <p className="font-neue-montreal font-normal text-xs mb-[28px] text-right" style={{ color: "#000000" }}>
           Led by alumni of leading tech and academic organizations
@@ -391,11 +397,17 @@ export function SpinningDots() {
             </div>
             <div
               className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"
-              style={{ opacity: hoveredIndex !== null ? 0 : 1, transition: "opacity 300ms ease-out" }}
+              style={{
+                opacity: hoveredIndex !== null ? 0 : isCtaHovered ? 0.2 : 1,
+                transition: "opacity 300ms ease-out",
+              }}
             />
             <div
               className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"
-              style={{ opacity: hoveredIndex !== null ? 0 : 1, transition: "opacity 300ms ease-out" }}
+              style={{
+                opacity: hoveredIndex !== null ? 0 : isCtaHovered ? 0.2 : 1,
+                transition: "opacity 300ms ease-out",
+              }}
             />
           </div>
         </div>
