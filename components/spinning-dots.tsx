@@ -286,6 +286,51 @@ export function SpinningDots() {
         }}
       >
         <div
+          className="relative w-[950px] h-[950px] animate-spin-normal"
+          style={{
+            transformOrigin: "50% 50%",
+            opacity: 0.2,
+          }}
+        >
+          {dots.map((dot, index) => (
+            <div
+              key={`outer-1.5x-${index}`}
+              className="absolute w-5 h-5 rounded-full left-1/2 top-1/2"
+              style={{
+                backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(457.5px, 0) rotate(-${dot.angle}deg)`,
+                transformOrigin: "center",
+              }}
+            />
+          ))}
+        </div>
+
+        <div
+          className="relative w-[1250px] h-[1250px] animate-spin-normal"
+          style={{
+            transformOrigin: "50% 50%",
+            opacity: 0.05,
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          {dots.map((dot, index) => (
+            <div
+              key={`outer-2x-${index}`}
+              className="absolute w-5 h-5 rounded-full left-1/2 top-1/2"
+              style={{
+                backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(610px, 0) rotate(-${dot.angle}deg)`,
+                transformOrigin: "center",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Main interactive ring */}
+        <div
           className={`relative w-[650px] h-[650px] ${hoveredIndex !== null || isCtaHovered ? "animate-spin-stopped" : "animate-spin-normal"}`}
           style={{
             transformOrigin: "50% 50%",
