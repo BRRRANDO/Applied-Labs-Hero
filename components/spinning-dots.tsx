@@ -280,13 +280,36 @@ export function SpinningDots() {
       </div>
 
       <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         style={{
-          transform: `translate(${parallaxOffset.x}px, ${parallaxOffset.y}px)`,
+          transform: `translate(calc(-50% + ${parallaxOffset.x}px), calc(-50% + ${parallaxOffset.y}px))`,
           transition: "transform 0.3s ease-out",
         }}
       >
+        {/* Outer ring 2x - 610px radius */}
         <div
-          className="relative w-[950px] h-[950px] animate-spin-normal"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1250px] h-[1250px] animate-spin-normal"
+          style={{
+            transformOrigin: "50% 50%",
+            opacity: 0.05,
+          }}
+        >
+          {dots.map((dot, index) => (
+            <div
+              key={`outer-2x-${index}`}
+              className="absolute w-5 h-5 rounded-full left-1/2 top-1/2"
+              style={{
+                backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(610px, 0) rotate(-${dot.angle}deg)`,
+                transformOrigin: "center",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Outer ring 1.5x - 457.5px radius */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[950px] h-[950px] animate-spin-normal"
           style={{
             transformOrigin: "50% 50%",
             opacity: 0.2,
@@ -305,33 +328,9 @@ export function SpinningDots() {
           ))}
         </div>
 
+        {/* Main interactive ring - 305px radius */}
         <div
-          className="relative w-[1250px] h-[1250px] animate-spin-normal"
-          style={{
-            transformOrigin: "50% 50%",
-            opacity: 0.05,
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
-        >
-          {dots.map((dot, index) => (
-            <div
-              key={`outer-2x-${index}`}
-              className="absolute w-5 h-5 rounded-full left-1/2 top-1/2"
-              style={{
-                backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
-                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(610px, 0) rotate(-${dot.angle}deg)`,
-                transformOrigin: "center",
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Main interactive ring */}
-        <div
-          className={`relative w-[650px] h-[650px] ${hoveredIndex !== null || isCtaHovered ? "animate-spin-stopped" : "animate-spin-normal"}`}
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] ${hoveredIndex !== null || isCtaHovered ? "animate-spin-stopped" : "animate-spin-normal"}`}
           style={{
             transformOrigin: "50% 50%",
           }}
