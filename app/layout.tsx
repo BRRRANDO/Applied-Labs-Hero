@@ -5,7 +5,7 @@ import { Suspense } from "react"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Applied Labs Hero",
+  title: "APPLIED LABS HERO",
   description: "Hero section for Applied Labs",
     generator: 'v0.app'
 }
