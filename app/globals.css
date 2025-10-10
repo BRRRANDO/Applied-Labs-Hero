@@ -181,6 +181,10 @@
     animation-play-state: paused;
   }
 
+  .animate-morph-blob {
+    animation: morph-blob 8s ease-in-out infinite;
+  }
+
   .animate-logo-scroll {
     animation: logo-scroll 60s linear infinite;
   }
@@ -215,6 +219,22 @@
     }
     100% {
       transform: rotate(360deg);
+    }
+  }
+
+  @keyframes morph-blob {
+    0%,
+    100% {
+      r: 30;
+    }
+    25% {
+      r: 38;
+    }
+    50% {
+      r: 25;
+    }
+    75% {
+      r: 35;
     }
   }
 
