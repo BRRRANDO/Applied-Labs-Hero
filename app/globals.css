@@ -3,6 +3,38 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: "Decimal";
+  src: url("/fonts/Decimal-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Decimal";
+  src: url("/fonts/Decimal-MediumItalic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -37,6 +69,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --font-decimal: "Decimal", ui-sans-serif, system-ui, sans-serif;
+  --font-neue-montreal: "PP Neue Montreal", ui-sans-serif, system-ui, sans-serif;
 }
 
 .dark {
@@ -113,6 +147,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --font-decimal: "Decimal", ui-sans-serif, system-ui, sans-serif;
+  --font-neue-montreal: "PP Neue Montreal", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -122,18 +158,27 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .font-decimal {
+    font-family: "Decimal", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 500;
+  }
+
+  .font-neue-montreal {
+    font-family: "PP Neue Montreal", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
+  }
 }
 
 @layer utilities {
   .animate-spin-normal {
     animation: spin 60s linear infinite;
-    transition: animation-duration 2s ease-in-out;
+    animation-play-state: running;
   }
 
   .animate-spin-stopped {
     animation: spin 60s linear infinite;
     animation-play-state: paused;
-    transition: animation-play-state 0.5s ease-in-out;
   }
 
   .animate-logo-scroll {
