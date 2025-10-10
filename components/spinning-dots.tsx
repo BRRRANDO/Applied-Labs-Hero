@@ -332,7 +332,7 @@ export function SpinningDots() {
         className="fixed z-[100] transition-opacity duration-500 ease-out"
         style={{ bottom: "40px", left: "32px", opacity: hoveredIndex !== null ? 0 : isCtaHovered ? 0.2 : 1 }}
       >
-        <p className="font-neue-montreal font-normal text-xs mb-[28px]" style={{ color: "#000000" }}>
+        <p className="font-neue-montreal font-normal text-sm mb-[28px]" style={{ color: "#000000" }}>
           Trusted by thousands of customers of leading brands
         </p>
         <div className="overflow-hidden" style={{ height: "22px", width: "320px" }}>
@@ -375,7 +375,7 @@ export function SpinningDots() {
         className="fixed z-[100] transition-opacity duration-500 ease-out"
         style={{ bottom: "40px", right: "32px", opacity: hoveredIndex !== null ? 0 : isCtaHovered ? 0.2 : 1 }}
       >
-        <p className="font-neue-montreal font-normal text-xs mb-[28px] text-right" style={{ color: "#000000" }}>
+        <p className="font-neue-montreal font-normal text-sm mb-[28px] text-right" style={{ color: "#000000" }}>
           Led by alumni of leading tech and academic organizations
         </p>
         <div className="overflow-hidden" style={{ height: "22px", width: "320px" }}>
