@@ -442,23 +442,23 @@ export function SpinningDots() {
               {[...Array(2)].map((_, setIndex) => (
                 <div key={setIndex} className="flex items-center shrink-0" style={{ gap: "40px" }}>
                   <img
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chanel-logo-png-transparent-u4Ka6m6HcTzSa9bm9arvGYxP0m67c3.png"
-                    alt="Chanel"
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Scale_AI-3%201-vcqdaUAC6t03sXBRsLCtkf0VLbOw6d.png"
+                    alt="Scale AI"
                     className="h-[22px] w-auto object-contain"
                   />
                   <img
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/amazon-logo-black-transparent-xXBDpoSsInIWhmQx7tfXtfTziNspfv.png"
-                    alt="Amazon"
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Google_Gemini_logo_2025.svg%201-46Za6lx4SdaofWm14T2uH1F6sjHVTq.png"
+                    alt="Google Gemini"
                     className="h-[22px] w-auto object-contain"
                   />
                   <img
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/prada-logo-black-and-white-2%201-q8B8evJcNHpUZsGNt79Pus6EuJTyYr.png"
-                    alt="Prada"
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/30664%201-4nOOh4GdJ2A3RHJTrNg9ChzdN0Ya7U.png"
+                    alt="IFTTT"
                     className="h-[22px] w-auto object-contain"
                   />
                   <img
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/microsoft-logo-white-transparent_2166875-tnXe0G2DSF3D2sL2SBYzlDABKITOY4.png"
-                    alt="Microsoft"
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-4%201-kdHJJDvUILFu0jxs0smj4dJRWxQNWZ.png"
+                    alt="Harvard University"
                     className="h-[22px] w-auto object-contain"
                   />
                 </div>
