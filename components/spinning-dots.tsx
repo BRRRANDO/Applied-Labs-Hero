@@ -291,7 +291,7 @@ export function SpinningDots() {
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1250px] h-[1250px] animate-spin-normal"
           style={{
             transformOrigin: "50% 50%",
-            opacity: hoveredIndex !== null ? 0 : 0.05,
+            opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.05,
             transition: "opacity 500ms ease-out",
           }}
         >
@@ -313,7 +313,7 @@ export function SpinningDots() {
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[950px] h-[950px] animate-spin-normal"
           style={{
             transformOrigin: "50% 50%",
-            opacity: hoveredIndex !== null ? 0 : 0.2,
+            opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.2,
             transition: "opacity 500ms ease-out",
           }}
         >
