@@ -332,10 +332,10 @@ export function SpinningDots() {
             filter: "url(#motionBlurStrong)",
           }}
         >
-          {[...Array(30)].map((_, index) => {
+          {[...Array(48)].map((_, index) => {
             const dotIndex = index % dots.length
             const dot = dots[dotIndex]
-            const angle = (360 / 30) * index
+            const angle = (360 / 48) * index
             return (
               <div
                 key={`outer-4th-${index}`}
@@ -367,10 +367,10 @@ export function SpinningDots() {
             filter: "url(#motionBlurMedium)",
           }}
         >
-          {[...Array(24)].map((_, index) => {
+          {[...Array(36)].map((_, index) => {
             const dotIndex = index % dots.length
             const dot = dots[dotIndex]
-            const angle = (360 / 24) * index
+            const angle = (360 / 36) * index
             return (
               <div
                 key={`outer-3rd-${index}`}
@@ -402,10 +402,10 @@ export function SpinningDots() {
             filter: "url(#motionBlurLight)",
           }}
         >
-          {[...Array(18)].map((_, index) => {
+          {[...Array(24)].map((_, index) => {
             const dotIndex = index % dots.length
             const dot = dots[dotIndex]
-            const angle = (360 / 18) * index
+            const angle = (360 / 24) * index
             return (
               <div
                 key={`outer-2nd-${index}`}
