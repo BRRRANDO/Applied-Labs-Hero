@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 const dots = [
   { angle: 0, h: 210, s: 80, l: 55, image: "/images/customer-retention.jpg", valueProposition: "Customer Retention" }, // Blue
   { angle: 30, h: 200, s: 70, l: 50, image: "/images/high-csat.jpg", valueProposition: "a 95%+ CSAT" }, // Blue
-  { angle: 60, h: 50, s: 90, l: 60, image: "/images/instant-responses.jpg", valueProposition: "Instant Responses" }, // Yellow
+  { angle: 60, h: 55, s: 75, l: 50, image: "/images/instant-responses.jpg", valueProposition: "Instant Responses" }, // Yellow
   { angle: 90, h: 160, s: 75, l: 45, image: "/images/24-7-support.jpg", valueProposition: "24/7 Support" }, // Green
   { angle: 120, h: 145, s: 70, l: 50, image: "/images/reduced-costs.jpg", valueProposition: "Reduced Support Costs" }, // Green
   {
@@ -19,7 +19,7 @@ const dots = [
   { angle: 210, h: 0, s: 0, l: 60, image: "/images/smart-routing.jpg", valueProposition: "Smart Ticket Routing" }, // Grey
   { angle: 240, h: 190, s: 80, l: 50, image: "/images/upsell.jpg", valueProposition: "Upsell Opportunities" }, // Blue
   { angle: 270, h: 170, s: 65, l: 45, image: "/images/sentiment-analysis.jpg", valueProposition: "Sentiment Analysis" }, // Green-blue
-  { angle: 300, h: 45, s: 95, l: 65, image: "/images/order-tracking.jpg", valueProposition: "Order Tracking" }, // Yellow
+  { angle: 300, h: 52, s: 80, l: 52, image: "/images/order-tracking.jpg", valueProposition: "Order Tracking" }, // Yellow
   { angle: 330, h: 0, s: 0, l: 40, image: "/images/proactive-support.jpg", valueProposition: "Proactive Support" }, // Dark grey
 ]
 
