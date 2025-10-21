@@ -2,25 +2,25 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 const dots = [
-  { angle: 0, h: 211, s: 100, l: 50, image: "/images/customer-retention.jpg", valueProposition: "Customer Retention" }, // Apple blue
-  { angle: 30, h: 357, s: 100, l: 67, image: "/images/high-csat.jpg", valueProposition: "a 95%+ CSAT" }, // Airbnb coral
-  { angle: 60, h: 28, s: 100, l: 50, image: "/images/instant-responses.jpg", valueProposition: "Instant Responses" }, // Apple orange
-  { angle: 90, h: 174, s: 100, l: 33, image: "/images/24-7-support.jpg", valueProposition: "24/7 Support" }, // Airbnb teal
-  { angle: 120, h: 145, s: 77, l: 49, image: "/images/reduced-costs.jpg", valueProposition: "Reduced Support Costs" }, // Apple green
+  { angle: 0, h: 210, s: 80, l: 55, image: "/images/customer-retention.jpg", valueProposition: "Customer Retention" }, // Blue
+  { angle: 30, h: 200, s: 70, l: 50, image: "/images/high-csat.jpg", valueProposition: "a 95%+ CSAT" }, // Blue
+  { angle: 60, h: 50, s: 90, l: 60, image: "/images/instant-responses.jpg", valueProposition: "Instant Responses" }, // Yellow
+  { angle: 90, h: 160, s: 75, l: 45, image: "/images/24-7-support.jpg", valueProposition: "24/7 Support" }, // Green
+  { angle: 120, h: 145, s: 70, l: 50, image: "/images/reduced-costs.jpg", valueProposition: "Reduced Support Costs" }, // Green
   {
     angle: 150,
-    h: 281,
-    s: 89,
-    l: 61,
+    h: 0,
+    s: 0,
+    l: 50,
     image: "/images/personalization.jpg",
     valueProposition: "Personalized Experiences",
-  }, // Apple purple
-  { angle: 180, h: 333, s: 100, l: 65, image: "/images/multilingual.jpg", valueProposition: "Multilingual Support" }, // Apple pink
-  { angle: 210, h: 210, s: 20, l: 60, image: "/images/smart-routing.jpg", valueProposition: "Smart Ticket Routing" }, // Soft gray-blue
-  { angle: 240, h: 195, s: 100, l: 45, image: "/images/upsell.jpg", valueProposition: "Upsell Opportunities" }, // Bright blue
-  { angle: 270, h: 190, s: 80, l: 50, image: "/images/sentiment-analysis.jpg", valueProposition: "Sentiment Analysis" }, // Vibrant cyan
-  { angle: 300, h: 45, s: 100, l: 55, image: "/images/order-tracking.jpg", valueProposition: "Order Tracking" }, // Warm yellow-orange
-  { angle: 330, h: 350, s: 85, l: 60, image: "/images/proactive-support.jpg", valueProposition: "Proactive Support" }, // Soft red-pink
+  }, // Grey
+  { angle: 180, h: 220, s: 85, l: 60, image: "/images/multilingual.jpg", valueProposition: "Multilingual Support" }, // Blue
+  { angle: 210, h: 0, s: 0, l: 60, image: "/images/smart-routing.jpg", valueProposition: "Smart Ticket Routing" }, // Grey
+  { angle: 240, h: 190, s: 80, l: 50, image: "/images/upsell.jpg", valueProposition: "Upsell Opportunities" }, // Blue
+  { angle: 270, h: 170, s: 65, l: 45, image: "/images/sentiment-analysis.jpg", valueProposition: "Sentiment Analysis" }, // Green-blue
+  { angle: 300, h: 45, s: 95, l: 65, image: "/images/order-tracking.jpg", valueProposition: "Order Tracking" }, // Yellow
+  { angle: 330, h: 0, s: 0, l: 40, image: "/images/proactive-support.jpg", valueProposition: "Proactive Support" }, // Dark grey
 ]
 function getLuminance(r: number, g: number, b: number): number {
   const [rs, gs, bs] = [r, g, b].map((c) => {
@@ -181,6 +181,14 @@ export function SpinningDots() {
       style={{ background: "white", transition: "background 600ms ease-in-out" }}
       onMouseMove={handleMouseMove}
     >
+      <svg width="0" height="0" style={{ position: "absolute" }}>
+        <defs>
+          <filter id="motionBlur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3,0" />
+          </filter>
+        </defs>
+      </svg>
+
       {hoveredIndex !== null && (
         <div
           className="absolute inset-0 transition-opacity duration-[600ms] ease-in-out"
@@ -286,19 +294,19 @@ export function SpinningDots() {
           transition: "transform 0.3s ease-out",
         }}
       >
-        {/* Outer ring 2x - 610px radius */}
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1250px] h-[1250px] animate-spin-normal"
           style={{
             transformOrigin: "50% 50%",
-            opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.05,
+            opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.1,
             transition: "opacity 500ms ease-out",
+            filter: "url(#motionBlur)",
           }}
         >
           {dots.map((dot, index) => (
             <div
               key={`outer-2x-${index}`}
-              className="absolute w-3.5 h-3.5 rounded-full left-1/2 top-1/2"
+              className="absolute w-[15px] h-[15px] rounded-full left-1/2 top-1/2"
               style={{
                 backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
                 transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(610px, 0) rotate(-${dot.angle}deg)`,
@@ -320,7 +328,7 @@ export function SpinningDots() {
           {dots.map((dot, index) => (
             <div
               key={`outer-1.5x-${index}`}
-              className="absolute w-3.5 h-3.5 rounded-full left-1/2 top-1/2"
+              className="absolute w-[15px] h-[15px] rounded-full left-1/2 top-1/2"
               style={{
                 backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
                 transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(457.5px, 0) rotate(-${dot.angle}deg)`,
@@ -330,7 +338,6 @@ export function SpinningDots() {
           ))}
         </div>
 
-        {/* Main interactive ring - 305px radius */}
         <div
           className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] ${hoveredIndex !== null || isCtaHovered ? "animate-spin-stopped" : "animate-spin-normal"}`}
           style={{
@@ -340,7 +347,7 @@ export function SpinningDots() {
           {dots.map((dot, index) => (
             <div
               key={index}
-              className="absolute w-3.5 h-3.5 rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer"
+              className="absolute w-[15px] h-[15px] rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer"
               style={{
                 backgroundColor: isCtaHovered ? "#3168FF" : `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
                 transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(${isCtaHovered ? "280px" : "305px"}, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
