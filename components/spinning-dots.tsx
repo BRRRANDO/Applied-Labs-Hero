@@ -323,7 +323,7 @@ export function SpinningDots() {
         }}
       >
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] animate-spin-normal"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1220px] h-[1220px] animate-spin-normal"
           style={{
             transformOrigin: "50% 50%",
             opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.08,
@@ -331,29 +331,34 @@ export function SpinningDots() {
             filter: "url(#motionBlurStrong)",
           }}
         >
-          {dots.map((dot, index) => (
-            <div
-              key={`outer-4th-${index}`}
-              className="absolute w-[8px] h-[8px] rounded-full left-1/2 top-1/2 overflow-hidden"
-              style={{
-                background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 0)),
-                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(485px, 0) rotate(-${dot.angle}deg)`,
-                transformOrigin: "center",
-              }}
-            >
+          {[...Array(24)].map((_, index) => {
+            const dotIndex = index % dots.length
+            const dot = dots[dotIndex]
+            const angle = (360 / 24) * index
+            return (
               <div
-                className="absolute inset-0 rounded-full"
+                key={`outer-4th-${index}`}
+                className="absolute w-[8px] h-[8px] rounded-full left-1/2 top-1/2 overflow-hidden"
                 style={{
-                  background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 0) + 10),
-                  animation: `gradient-hue-shift-${index % 3} 4s ease-in-out infinite`,
+                  background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 0)),
+                  transform: `translate(-50%, -50%) rotate(${angle}deg) translate(590px, 0) rotate(-${angle}deg)`,
+                  transformOrigin: "center",
                 }}
-              />
-            </div>
-          ))}
+              >
+                <div
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 0) + 10),
+                    animation: `gradient-hue-shift-${dotIndex % 3} 4s ease-in-out infinite`,
+                  }}
+                />
+              </div>
+            )
+          })}
         </div>
 
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[880px] h-[880px] animate-spin-normal"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1030px] h-[1030px] animate-spin-normal"
           style={{
             transformOrigin: "50% 50%",
             opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.12,
@@ -361,29 +366,34 @@ export function SpinningDots() {
             filter: "url(#motionBlurMedium)",
           }}
         >
-          {dots.map((dot, index) => (
-            <div
-              key={`outer-3rd-${index}`}
-              className="absolute w-[10px] h-[10px] rounded-full left-1/2 top-1/2 overflow-hidden"
-              style={{
-                background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 1)),
-                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(425px, 0) rotate(-${dot.angle}deg)`,
-                transformOrigin: "center",
-              }}
-            >
+          {[...Array(20)].map((_, index) => {
+            const dotIndex = index % dots.length
+            const dot = dots[dotIndex]
+            const angle = (360 / 20) * index
+            return (
               <div
-                className="absolute inset-0 rounded-full"
+                key={`outer-3rd-${index}`}
+                className="absolute w-[10px] h-[10px] rounded-full left-1/2 top-1/2 overflow-hidden"
                 style={{
-                  background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 1) + 10),
-                  animation: `gradient-hue-shift-${(index + 1) % 3} 4s ease-in-out infinite`,
+                  background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 1)),
+                  transform: `translate(-50%, -50%) rotate(${angle}deg) translate(495px, 0) rotate(-${angle}deg)`,
+                  transformOrigin: "center",
                 }}
-              />
-            </div>
-          ))}
+              >
+                <div
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 1) + 10),
+                    animation: `gradient-hue-shift-${(dotIndex + 1) % 3} 4s ease-in-out infinite`,
+                  }}
+                />
+              </div>
+            )
+          })}
         </div>
 
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[760px] h-[760px] animate-spin-normal"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[840px] h-[840px] animate-spin-normal"
           style={{
             transformOrigin: "50% 50%",
             opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.18,
@@ -391,28 +401,33 @@ export function SpinningDots() {
             filter: "url(#motionBlurLight)",
           }}
         >
-          {dots.map((dot, index) => (
-            <div
-              key={`outer-2nd-${index}`}
-              className="absolute w-[12px] h-[12px] rounded-full left-1/2 top-1/2 overflow-hidden"
-              style={{
-                background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 2)),
-                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(365px, 0) rotate(-${dot.angle}deg)`,
-                transformOrigin: "center",
-              }}
-            >
+          {[...Array(16)].map((_, index) => {
+            const dotIndex = index % dots.length
+            const dot = dots[dotIndex]
+            const angle = (360 / 16) * index
+            return (
               <div
-                className="absolute inset-0 rounded-full"
+                key={`outer-2nd-${index}`}
+                className="absolute w-[12px] h-[12px] rounded-full left-1/2 top-1/2 overflow-hidden"
                 style={{
-                  background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 2) + 10),
-                  animation: `gradient-hue-shift-${(index + 2) % 3} 4s ease-in-out infinite`,
+                  background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 2)),
+                  transform: `translate(-50%, -50%) rotate(${angle}deg) translate(400px, 0) rotate(-${angle}deg)`,
+                  transformOrigin: "center",
                 }}
-              />
-            </div>
-          ))}
+              >
+                <div
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 2) + 10),
+                    animation: `gradient-hue-shift-${(dotIndex + 2) % 3} 4s ease-in-out infinite`,
+                  }}
+                />
+              </div>
+            )
+          })}
         </div>
 
-        {/* Main ring - 305px radius */}
+        {/* Main ring - 305px radius, 15px dots, 12 dots total */}
         <div
           className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] ${hoveredIndex !== null || isCtaHovered ? "animate-spin-stopped" : "animate-spin-normal"}`}
           style={{
