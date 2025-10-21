@@ -389,24 +389,27 @@ export function SpinningDots() {
               key={index}
               className="absolute w-[15px] h-[15px] rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer overflow-hidden"
               style={{
-                background: isCtaHovered ? "#3168FF" : getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 2)),
+                background: isCtaHovered
+                  ? "linear-gradient(135deg, #3168FF, #3168FF)"
+                  : getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 2)),
                 transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(${isCtaHovered ? "280px" : "305px"}, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
                 transformOrigin: "center",
                 opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
                 transition:
-                  "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1), background 400ms ease-in-out",
+                  "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1), background 500ms ease-in-out",
               }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <div
-                className="absolute inset-0 rounded-full transition-opacity duration-400"
+                className="absolute inset-0 rounded-full"
                 style={{
                   background: isCtaHovered
-                    ? "#3168FF"
+                    ? "linear-gradient(135deg, #3168FF, #3168FF)"
                     : getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 2) + 10),
                   animation: isCtaHovered ? "none" : `gradient-hue-shift-${(index + 2) % 3} 4s ease-in-out infinite`,
                   opacity: isCtaHovered ? 0 : 1,
+                  transition: "opacity 500ms ease-in-out, background 500ms ease-in-out",
                 }}
               />
             </div>
