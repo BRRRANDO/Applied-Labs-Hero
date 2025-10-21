@@ -1,26 +1,27 @@
 "use client"
 import type React from "react"
 import { useState, useEffect } from "react"
+
 const dots = [
-  { angle: 0, h: 210, s: 80, l: 55, image: "/images/customer-retention.jpg", valueProposition: "Customer Retention" }, // Blue
-  { angle: 30, h: 200, s: 70, l: 50, image: "/images/high-csat.jpg", valueProposition: "a 95%+ CSAT" }, // Blue
-  { angle: 60, h: 55, s: 75, l: 50, image: "/images/instant-responses.jpg", valueProposition: "Instant Responses" }, // Yellow
-  { angle: 90, h: 160, s: 75, l: 45, image: "/images/24-7-support.jpg", valueProposition: "24/7 Support" }, // Green
-  { angle: 120, h: 145, s: 70, l: 50, image: "/images/reduced-costs.jpg", valueProposition: "Reduced Support Costs" }, // Green
+  { angle: 0, h: 213, s: 100, l: 51, image: "/images/customer-retention.jpg", valueProposition: "Customer Retention" }, // #036BFF Blue
+  { angle: 30, h: 357, s: 100, l: 67, image: "/images/high-csat.jpg", valueProposition: "a 95%+ CSAT" }, // #FF5A5F Airbnb pink
+  { angle: 60, h: 38, s: 100, l: 52, image: "/images/instant-responses.jpg", valueProposition: "Instant Responses" }, // #FF9F0A Apple Watch Ultra orange
+  { angle: 90, h: 145, s: 63, l: 49, image: "/images/24-7-support.jpg", valueProposition: "24/7 Support" }, // #34C759 Apple green
+  { angle: 120, h: 0, s: 0, l: 60, image: "/images/reduced-costs.jpg", valueProposition: "Reduced Support Costs" }, // Grey
   {
     angle: 150,
-    h: 0,
-    s: 0,
-    l: 50,
+    h: 213,
+    s: 100,
+    l: 51,
     image: "/images/personalization.jpg",
     valueProposition: "Personalized Experiences",
-  }, // Grey
-  { angle: 180, h: 220, s: 85, l: 60, image: "/images/multilingual.jpg", valueProposition: "Multilingual Support" }, // Blue
-  { angle: 210, h: 0, s: 0, l: 60, image: "/images/smart-routing.jpg", valueProposition: "Smart Ticket Routing" }, // Grey
-  { angle: 240, h: 190, s: 80, l: 50, image: "/images/upsell.jpg", valueProposition: "Upsell Opportunities" }, // Blue
-  { angle: 270, h: 170, s: 65, l: 45, image: "/images/sentiment-analysis.jpg", valueProposition: "Sentiment Analysis" }, // Green-blue
-  { angle: 300, h: 52, s: 80, l: 52, image: "/images/order-tracking.jpg", valueProposition: "Order Tracking" }, // Yellow
-  { angle: 330, h: 0, s: 0, l: 40, image: "/images/proactive-support.jpg", valueProposition: "Proactive Support" }, // Dark grey
+  }, // #036BFF Blue
+  { angle: 180, h: 357, s: 100, l: 67, image: "/images/multilingual.jpg", valueProposition: "Multilingual Support" }, // #FF5A5F Airbnb pink
+  { angle: 210, h: 38, s: 100, l: 52, image: "/images/smart-routing.jpg", valueProposition: "Smart Ticket Routing" }, // #FF9F0A Apple Watch Ultra orange
+  { angle: 240, h: 145, s: 63, l: 49, image: "/images/upsell.jpg", valueProposition: "Upsell Opportunities" }, // #34C759 Apple green
+  { angle: 270, h: 0, s: 0, l: 50, image: "/images/sentiment-analysis.jpg", valueProposition: "Sentiment Analysis" }, // Grey (darker)
+  { angle: 300, h: 213, s: 100, l: 51, image: "/images/order-tracking.jpg", valueProposition: "Order Tracking" }, // #036BFF Blue
+  { angle: 330, h: 0, s: 0, l: 55, image: "/images/proactive-support.jpg", valueProposition: "Proactive Support" }, // Grey (medium)
 ]
 
 function getDotGradient(h: number, s: number, l: number, hueShift = 0): string {
