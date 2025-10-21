@@ -32,11 +32,10 @@ function getDotGradient(h: number, s: number, l: number, hueShift = 0): string {
 }
 
 function getHueShift(index: number, variant: number): number {
-  // Create orderly but varied hue shifts: -10 to +10 degrees
   const patterns = [
-    [0, 5, -5, 8, -8, 3, -3, 10, -10, 6, -6, 4],
-    [5, -5, 10, -10, 3, -3, 8, -8, 0, 6, -6, 4],
-    [10, -10, 5, -5, 8, -8, 0, 3, -3, 6, -6, 4],
+    [0, 3, -3, 4, -4, 2, -2, 5, -5, 3, -3, 2],
+    [3, -3, 5, -5, 2, -2, 4, -4, 0, 3, -3, 2],
+    [5, -5, 3, -3, 4, -4, 0, 2, -2, 3, -3, 2],
   ]
   return patterns[variant % 3][index % 12]
 }
@@ -328,7 +327,7 @@ export function SpinningDots() {
           style={{
             transformOrigin: "50% 50%",
             opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.08,
-            transition: "opacity 500ms ease-out",
+            transition: "opacity 500ms ease-in-out",
             filter: "url(#motionBlurStrong)",
           }}
         >
@@ -349,7 +348,7 @@ export function SpinningDots() {
                 <div
                   className="absolute inset-0 rounded-full"
                   style={{
-                    background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 0) + 10),
+                    background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 0) + 5),
                     animation: `gradient-hue-shift-${dotIndex % 3} 4s ease-in-out infinite`,
                   }}
                 />
@@ -363,7 +362,7 @@ export function SpinningDots() {
           style={{
             transformOrigin: "50% 50%",
             opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.12,
-            transition: "opacity 500ms ease-out",
+            transition: "opacity 500ms ease-in-out",
             filter: "url(#motionBlurMedium)",
           }}
         >
@@ -384,7 +383,7 @@ export function SpinningDots() {
                 <div
                   className="absolute inset-0 rounded-full"
                   style={{
-                    background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 1) + 10),
+                    background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 1) + 5),
                     animation: `gradient-hue-shift-${(dotIndex + 1) % 3} 4s ease-in-out infinite`,
                   }}
                 />
@@ -398,7 +397,7 @@ export function SpinningDots() {
           style={{
             transformOrigin: "50% 50%",
             opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.18,
-            transition: "opacity 500ms ease-out",
+            transition: "opacity 500ms ease-in-out",
             filter: "url(#motionBlurLight)",
           }}
         >
@@ -419,7 +418,7 @@ export function SpinningDots() {
                 <div
                   className="absolute inset-0 rounded-full"
                   style={{
-                    background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 2) + 10),
+                    background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 2) + 5),
                     animation: `gradient-hue-shift-${(dotIndex + 2) % 3} 4s ease-in-out infinite`,
                   }}
                 />
@@ -456,7 +455,7 @@ export function SpinningDots() {
                 style={{
                   background: isCtaHovered
                     ? "linear-gradient(135deg, #3168FF, #3168FF)"
-                    : getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 2) + 10),
+                    : getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 2) + 5),
                   animation: isCtaHovered ? "none" : `gradient-hue-shift-${(index + 2) % 3} 4s ease-in-out infinite`,
                   opacity: isCtaHovered ? 0 : 1,
                   transition: "opacity 500ms ease-in-out, background 500ms ease-in-out",
