@@ -2,25 +2,25 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 const dots = [
-  { angle: 0, h: 15, s: 70, l: 60, image: "/images/customer-retention.jpg", valueProposition: "Customer Retention" },
-  { angle: 30, h: 200, s: 60, l: 55, image: "/images/high-csat.jpg", valueProposition: "a 95%+ CSAT" },
-  { angle: 60, h: 45, s: 75, l: 65, image: "/images/instant-responses.jpg", valueProposition: "Instant Responses" },
-  { angle: 90, h: 120, s: 50, l: 50, image: "/images/24-7-support.jpg", valueProposition: "24/7 Support" },
-  { angle: 120, h: 280, s: 55, l: 60, image: "/images/reduced-costs.jpg", valueProposition: "Reduced Support Costs" },
+  { angle: 0, h: 211, s: 100, l: 50, image: "/images/customer-retention.jpg", valueProposition: "Customer Retention" }, // Apple blue
+  { angle: 30, h: 357, s: 100, l: 67, image: "/images/high-csat.jpg", valueProposition: "a 95%+ CSAT" }, // Airbnb coral
+  { angle: 60, h: 28, s: 100, l: 50, image: "/images/instant-responses.jpg", valueProposition: "Instant Responses" }, // Apple orange
+  { angle: 90, h: 174, s: 100, l: 33, image: "/images/24-7-support.jpg", valueProposition: "24/7 Support" }, // Airbnb teal
+  { angle: 120, h: 145, s: 77, l: 49, image: "/images/reduced-costs.jpg", valueProposition: "Reduced Support Costs" }, // Apple green
   {
     angle: 150,
-    h: 210,
-    s: 65,
-    l: 58,
+    h: 281,
+    s: 89,
+    l: 61,
     image: "/images/personalization.jpg",
     valueProposition: "Personalized Experiences",
-  },
-  { angle: 180, h: 330, s: 60, l: 65, image: "/images/multilingual.jpg", valueProposition: "Multilingual Support" },
-  { angle: 210, h: 270, s: 50, l: 60, image: "/images/smart-routing.jpg", valueProposition: "Smart Ticket Routing" },
-  { angle: 240, h: 25, s: 70, l: 62, image: "/images/upsell.jpg", valueProposition: "Upsell Opportunities" },
-  { angle: 270, h: 190, s: 58, l: 56, image: "/images/sentiment-analysis.jpg", valueProposition: "Sentiment Analysis" },
-  { angle: 300, h: 85, s: 60, l: 58, image: "/images/order-tracking.jpg", valueProposition: "Order Tracking" },
-  { angle: 330, h: 50, s: 68, l: 60, image: "/images/proactive-support.jpg", valueProposition: "Proactive Support" },
+  }, // Apple purple
+  { angle: 180, h: 333, s: 100, l: 65, image: "/images/multilingual.jpg", valueProposition: "Multilingual Support" }, // Apple pink
+  { angle: 210, h: 210, s: 20, l: 60, image: "/images/smart-routing.jpg", valueProposition: "Smart Ticket Routing" }, // Soft gray-blue
+  { angle: 240, h: 195, s: 100, l: 45, image: "/images/upsell.jpg", valueProposition: "Upsell Opportunities" }, // Bright blue
+  { angle: 270, h: 190, s: 80, l: 50, image: "/images/sentiment-analysis.jpg", valueProposition: "Sentiment Analysis" }, // Vibrant cyan
+  { angle: 300, h: 45, s: 100, l: 55, image: "/images/order-tracking.jpg", valueProposition: "Order Tracking" }, // Warm yellow-orange
+  { angle: 330, h: 350, s: 85, l: 60, image: "/images/proactive-support.jpg", valueProposition: "Proactive Support" }, // Soft red-pink
 ]
 function getLuminance(r: number, g: number, b: number): number {
   const [rs, gs, bs] = [r, g, b].map((c) => {
@@ -181,75 +181,6 @@ export function SpinningDots() {
       style={{ background: "white", transition: "background 600ms ease-in-out" }}
       onMouseMove={handleMouseMove}
     >
-      {/* Outer ring 2x - 610px radius */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1250px] h-[1250px] animate-spin-normal"
-        style={{
-          transformOrigin: "50% 50%",
-          opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.05,
-          transition: "opacity 500ms ease-out",
-        }}
-      >
-        {dots.map((dot, index) => (
-          <div
-            key={`outer-2x-${index}`}
-            className="absolute w-5 h-5 rounded-full left-1/2 top-1/2"
-            style={{
-              backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
-              transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(610px, 0) rotate(-${dot.angle}deg)`,
-              transformOrigin: "center",
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Outer ring 1.5x - 457.5px radius */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[950px] h-[950px] animate-spin-normal"
-        style={{
-          transformOrigin: "50% 50%",
-          opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.2,
-          transition: "opacity 500ms ease-out",
-        }}
-      >
-        {dots.map((dot, index) => (
-          <div
-            key={`outer-1.5x-${index}`}
-            className="absolute w-5 h-5 rounded-full left-1/2 top-1/2"
-            style={{
-              backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
-              transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(457.5px, 0) rotate(-${dot.angle}deg)`,
-              transformOrigin: "center",
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Main interactive ring - 305px radius */}
-      <div
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] ${hoveredIndex !== null || isCtaHovered ? "animate-spin-stopped" : "animate-spin-normal"}`}
-        style={{
-          transformOrigin: "50% 50%",
-        }}
-      >
-        {dots.map((dot, index) => (
-          <div
-            key={index}
-            className="absolute w-5 h-5 rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer"
-            style={{
-              backgroundColor: isCtaHovered ? "#3168FF" : `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
-              transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(${isCtaHovered ? "280px" : "305px"}, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
-              transformOrigin: "center",
-              opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
-              transition:
-                "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 400ms ease-in-out",
-            }}
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          />
-        ))}
-      </div>
-
       {hoveredIndex !== null && (
         <div
           className="absolute inset-0 transition-opacity duration-[600ms] ease-in-out"
@@ -346,6 +277,83 @@ export function SpinningDots() {
         >
           GET DEMO
         </button>
+      </div>
+
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        style={{
+          transform: `translate(calc(-50% + ${parallaxOffset.x}px), calc(-50% + ${parallaxOffset.y}px))`,
+          transition: "transform 0.3s ease-out",
+        }}
+      >
+        {/* Outer ring 2x - 610px radius */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1250px] h-[1250px] animate-spin-normal"
+          style={{
+            transformOrigin: "50% 50%",
+            opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.05,
+            transition: "opacity 500ms ease-out",
+          }}
+        >
+          {dots.map((dot, index) => (
+            <div
+              key={`outer-2x-${index}`}
+              className="absolute w-3.5 h-3.5 rounded-full left-1/2 top-1/2"
+              style={{
+                backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(610px, 0) rotate(-${dot.angle}deg)`,
+                transformOrigin: "center",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Outer ring 1.5x - 457.5px radius */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[950px] h-[950px] animate-spin-normal"
+          style={{
+            transformOrigin: "50% 50%",
+            opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.2,
+            transition: "opacity 500ms ease-out",
+          }}
+        >
+          {dots.map((dot, index) => (
+            <div
+              key={`outer-1.5x-${index}`}
+              className="absolute w-3.5 h-3.5 rounded-full left-1/2 top-1/2"
+              style={{
+                backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(457.5px, 0) rotate(-${dot.angle}deg)`,
+                transformOrigin: "center",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Main interactive ring - 305px radius */}
+        <div
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] ${hoveredIndex !== null || isCtaHovered ? "animate-spin-stopped" : "animate-spin-normal"}`}
+          style={{
+            transformOrigin: "50% 50%",
+          }}
+        >
+          {dots.map((dot, index) => (
+            <div
+              key={index}
+              className="absolute w-3.5 h-3.5 rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer"
+              style={{
+                backgroundColor: isCtaHovered ? "#3168FF" : `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(${isCtaHovered ? "280px" : "305px"}, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
+                transformOrigin: "center",
+                opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
+                transition:
+                  "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 400ms ease-in-out",
+              }}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            />
+          ))}
+        </div>
       </div>
 
       {showImage && currentImageIndex !== null && (
