@@ -2,25 +2,25 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 const dots = [
-  { angle: 0, h: 25, s: 95, l: 55, image: "/images/customer-retention.jpg", valueProposition: "Customer Retention" }, // Vibrant orange
-  { angle: 30, h: 355, s: 85, l: 55, image: "/images/high-csat.jpg", valueProposition: "a 95%+ CSAT" }, // Vibrant red
-  { angle: 60, h: 48, s: 95, l: 55, image: "/images/instant-responses.jpg", valueProposition: "Instant Responses" }, // Vibrant yellow
-  { angle: 90, h: 145, s: 75, l: 45, image: "/images/24-7-support.jpg", valueProposition: "24/7 Support" }, // Vibrant green
-  { angle: 120, h: 185, s: 85, l: 50, image: "/images/reduced-costs.jpg", valueProposition: "Reduced Support Costs" }, // Vibrant cyan
+  { angle: 0, h: 15, s: 70, l: 60, image: "/images/customer-retention.jpg", valueProposition: "Customer Retention" },
+  { angle: 30, h: 200, s: 60, l: 55, image: "/images/high-csat.jpg", valueProposition: "a 95%+ CSAT" },
+  { angle: 60, h: 45, s: 75, l: 65, image: "/images/instant-responses.jpg", valueProposition: "Instant Responses" },
+  { angle: 90, h: 120, s: 50, l: 50, image: "/images/24-7-support.jpg", valueProposition: "24/7 Support" },
+  { angle: 120, h: 280, s: 55, l: 60, image: "/images/reduced-costs.jpg", valueProposition: "Reduced Support Costs" },
   {
     angle: 150,
-    h: 213,
-    s: 99,
-    l: 51,
+    h: 210,
+    s: 65,
+    l: 58,
     image: "/images/personalization.jpg",
     valueProposition: "Personalized Experiences",
-  }, // Vibrant blue #036BFF
-  { angle: 180, h: 330, s: 85, l: 60, image: "/images/multilingual.jpg", valueProposition: "Multilingual Support" }, // Vibrant pink/magenta
-  { angle: 210, h: 270, s: 75, l: 55, image: "/images/smart-routing.jpg", valueProposition: "Smart Ticket Routing" }, // Vibrant purple
-  { angle: 240, h: 15, s: 90, l: 58, image: "/images/upsell.jpg", valueProposition: "Upsell Opportunities" }, // Vibrant coral
-  { angle: 270, h: 200, s: 80, l: 48, image: "/images/sentiment-analysis.jpg", valueProposition: "Sentiment Analysis" }, // Vibrant blue-cyan
-  { angle: 300, h: 85, s: 85, l: 50, image: "/images/order-tracking.jpg", valueProposition: "Order Tracking" }, // Vibrant lime green
-  { angle: 330, h: 40, s: 92, l: 52, image: "/images/proactive-support.jpg", valueProposition: "Proactive Support" }, // Vibrant golden yellow
+  },
+  { angle: 180, h: 330, s: 60, l: 65, image: "/images/multilingual.jpg", valueProposition: "Multilingual Support" },
+  { angle: 210, h: 270, s: 50, l: 60, image: "/images/smart-routing.jpg", valueProposition: "Smart Ticket Routing" },
+  { angle: 240, h: 25, s: 70, l: 62, image: "/images/upsell.jpg", valueProposition: "Upsell Opportunities" },
+  { angle: 270, h: 190, s: 58, l: 56, image: "/images/sentiment-analysis.jpg", valueProposition: "Sentiment Analysis" },
+  { angle: 300, h: 85, s: 60, l: 58, image: "/images/order-tracking.jpg", valueProposition: "Order Tracking" },
+  { angle: 330, h: 50, s: 68, l: 60, image: "/images/proactive-support.jpg", valueProposition: "Proactive Support" },
 ]
 function getLuminance(r: number, g: number, b: number): number {
   const [rs, gs, bs] = [r, g, b].map((c) => {
@@ -181,13 +181,74 @@ export function SpinningDots() {
       style={{ background: "white", transition: "background 600ms ease-in-out" }}
       onMouseMove={handleMouseMove}
     >
-      <svg width="0" height="0" style={{ position: "absolute" }}>
-        <defs>
-          <filter id="motion-blur">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="2,0" />
-          </filter>
-        </defs>
-      </svg>
+      {/* Outer ring 2x - 610px radius */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1250px] h-[1250px] animate-spin-normal"
+        style={{
+          transformOrigin: "50% 50%",
+          opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.05,
+          transition: "opacity 500ms ease-out",
+        }}
+      >
+        {dots.map((dot, index) => (
+          <div
+            key={`outer-2x-${index}`}
+            className="absolute w-5 h-5 rounded-full left-1/2 top-1/2"
+            style={{
+              backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+              transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(610px, 0) rotate(-${dot.angle}deg)`,
+              transformOrigin: "center",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Outer ring 1.5x - 457.5px radius */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[950px] h-[950px] animate-spin-normal"
+        style={{
+          transformOrigin: "50% 50%",
+          opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.2,
+          transition: "opacity 500ms ease-out",
+        }}
+      >
+        {dots.map((dot, index) => (
+          <div
+            key={`outer-1.5x-${index}`}
+            className="absolute w-5 h-5 rounded-full left-1/2 top-1/2"
+            style={{
+              backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+              transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(457.5px, 0) rotate(-${dot.angle}deg)`,
+              transformOrigin: "center",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Main interactive ring - 305px radius */}
+      <div
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] ${hoveredIndex !== null || isCtaHovered ? "animate-spin-stopped" : "animate-spin-normal"}`}
+        style={{
+          transformOrigin: "50% 50%",
+        }}
+      >
+        {dots.map((dot, index) => (
+          <div
+            key={index}
+            className="absolute w-5 h-5 rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer"
+            style={{
+              backgroundColor: isCtaHovered ? "#3168FF" : `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+              transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(${isCtaHovered ? "280px" : "305px"}, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
+              transformOrigin: "center",
+              opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
+              transition:
+                "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 400ms ease-in-out",
+            }}
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          />
+        ))}
+      </div>
 
       {hoveredIndex !== null && (
         <div
@@ -205,7 +266,7 @@ export function SpinningDots() {
         <div className="flex items-center justify-between text-sm">
           <div
             className="font-decimal text-[15px] font-medium leading-[130%] transition-colors duration-500 ease-out"
-            style={{ color: isCtaHovered ? "#036BFF" : textColor }}
+            style={{ color: isCtaHovered ? "#3168FF" : textColor }}
           >
             APPLIED LABS
           </div>
@@ -228,7 +289,7 @@ export function SpinningDots() {
           <div
             className="font-decimal text-[15px] font-medium leading-[130%] transition-opacity duration-500 ease-out cursor-pointer"
             style={{
-              color: isNavButtonHovered ? "#036BFF" : textColor,
+              color: isNavButtonHovered ? "#3168FF" : textColor,
               transition: "color 400ms ease-in-out, opacity 500ms ease-out",
               opacity: hoveredIndex !== null ? 0 : isCtaHovered ? 0.2 : 1,
             }}
@@ -266,7 +327,7 @@ export function SpinningDots() {
           style={{
             padding: "10px 20px 11px 20px",
             borderRadius: "4px",
-            background: isMainButtonHovered ? "#036BFF" : hoveredIndex !== null ? textColor : "#000000",
+            background: isMainButtonHovered ? "#3168FF" : hoveredIndex !== null ? textColor : "#000000",
             color: "#FFFFFF",
             display: "inline-flex",
             justifyContent: "center",
@@ -285,86 +346,6 @@ export function SpinningDots() {
         >
           GET DEMO
         </button>
-      </div>
-
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-        style={{
-          transform: `translate(calc(-50% + ${parallaxOffset.x}px), calc(-50% + ${parallaxOffset.y}px))`,
-          transition: "transform 0.3s ease-out",
-        }}
-      >
-        {/* Outer ring 2x - 610px radius */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1250px] h-[1250px] animate-spin-normal"
-          style={{
-            transformOrigin: "50% 50%",
-            opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.05,
-            transition: "opacity 500ms ease-out",
-            filter: "url(#motion-blur)", // Added motion blur filter
-          }}
-        >
-          {dots.map((dot, index) => (
-            <div
-              key={`outer-2x-${index}`}
-              className="absolute w-5 h-5 rounded-full left-1/2 top-1/2"
-              style={{
-                backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
-                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(610px, 0) rotate(-${dot.angle}deg)`,
-                transformOrigin: "center",
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Outer ring 1.5x - 457.5px radius */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[950px] h-[950px] animate-spin-normal"
-          style={{
-            transformOrigin: "50% 50%",
-            opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.2,
-            transition: "opacity 500ms ease-out",
-            filter: "url(#motion-blur)", // Added motion blur filter
-          }}
-        >
-          {dots.map((dot, index) => (
-            <div
-              key={`outer-1.5x-${index}`}
-              className="absolute w-5 h-5 rounded-full left-1/2 top-1/2"
-              style={{
-                backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
-                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(457.5px, 0) rotate(-${dot.angle}deg)`,
-                transformOrigin: "center",
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Main interactive ring - 305px radius */}
-        <div
-          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] ${hoveredIndex !== null || isCtaHovered ? "animate-spin-stopped" : "animate-spin-normal"}`}
-          style={{
-            transformOrigin: "50% 50%",
-            filter: hoveredIndex !== null || isCtaHovered ? "none" : "url(#motion-blur)", // Added conditional motion blur
-          }}
-        >
-          {dots.map((dot, index) => (
-            <div
-              key={index}
-              className="absolute w-5 h-5 rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer"
-              style={{
-                backgroundColor: isCtaHovered ? "#036BFF" : `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`, // Updated CTA hover color to match new blue
-                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(${isCtaHovered ? "280px" : "305px"}, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
-                transformOrigin: "center",
-                opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
-                transition:
-                  "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 400ms ease-in-out",
-              }}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            />
-          ))}
-        </div>
       </div>
 
       {showImage && currentImageIndex !== null && (
