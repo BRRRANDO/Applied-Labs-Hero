@@ -333,6 +333,7 @@ export function SpinningDots() {
                   transform: `translate(-50%, -50%) rotate(${(360 / 48) * index}deg) translate(590px, 0) rotate(-${(360 / 48) * index}deg)`,
                   transformOrigin: "center",
                   background: `hsl(${color.h}, ${color.s}%, ${color.l}%)`,
+                  opacity: 0.8,
                 }}
               />
             )
@@ -366,6 +367,7 @@ export function SpinningDots() {
                   transform: `translate(-50%, -50%) rotate(${(360 / 36) * index}deg) translate(495px, 0) rotate(-${(360 / 36) * index}deg)`,
                   transformOrigin: "center",
                   background: `hsl(${color.h}, ${color.s}%, ${color.l}%)`,
+                  opacity: 0.8,
                 }}
               />
             )
@@ -396,9 +398,10 @@ export function SpinningDots() {
                 key={`outer-2nd-${index}`}
                 className="absolute w-[12px] h-[12px] rounded-full left-1/2 top-1/2"
                 style={{
-                  transform: `translate(-50%, -50%) rotate(${(360 / 24) * index}deg) translate(400px, 0) rotate(-${(360 / 24) * index}deg)`,
+                  transform: `translate(-50%, -50%) rotate(${(360 / 24) * index}deg) translate(${isCtaHovered ? "280px" : "305px"}, 0) rotate(-${(360 / 24) * index}deg)`,
                   transformOrigin: "center",
                   background: `hsl(${color.h}, ${color.s}%, ${color.l}%)`,
+                  opacity: 0.8,
                 }}
               />
             )
@@ -412,14 +415,17 @@ export function SpinningDots() {
           }}
         >
           {dots.map((dot, index) => {
+            const isHovered = hoveredIndex === index
+            const isOtherHovered = hoveredIndex !== null && hoveredIndex !== index
+
             return (
               <div
                 key={index}
                 className="absolute w-[15px] h-[15px] rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer"
                 style={{
-                  transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(${isCtaHovered ? "280px" : "305px"}, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
+                  transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(${isCtaHovered ? "280px" : "305px"}, 0) rotate(-${dot.angle}deg) ${isOtherHovered ? "scale(0.4)" : "scale(1)"}`,
                   transformOrigin: "center",
-                  opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
+                  opacity: isOtherHovered ? 0.2 : isHovered ? 1 : 0.8,
                   background: isCtaHovered ? "#3168FF" : `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
                   transition:
                     "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1), background 500ms ease-in-out",
