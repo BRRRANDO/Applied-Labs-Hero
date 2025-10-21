@@ -22,6 +22,14 @@ const dots = [
   { angle: 300, h: 45, s: 95, l: 65, image: "/images/order-tracking.jpg", valueProposition: "Order Tracking" }, // Yellow
   { angle: 330, h: 0, s: 0, l: 40, image: "/images/proactive-support.jpg", valueProposition: "Proactive Support" }, // Dark grey
 ]
+
+function getDotGradient(h: number, s: number, l: number): string {
+  // Create darker and lighter versions within the same hue
+  const darkL = Math.max(l - 18, 10)
+  const lightL = Math.min(l + 18, 90)
+  return `radial-gradient(circle at 30% 30%, hsl(${h}, ${s}%, ${lightL}%), hsl(${h}, ${s}%, ${darkL}%))`
+}
+
 function getLuminance(r: number, g: number, b: number): number {
   const [rs, gs, bs] = [r, g, b].map((c) => {
     const val = c / 255
@@ -29,11 +37,13 @@ function getLuminance(r: number, g: number, b: number): number {
   })
   return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs
 }
+
 function getContrastRatio(l1: number, l2: number): number {
   const lighter = Math.max(l1, l2)
   const darker = Math.min(l1, l2)
   return (lighter + 0.05) / (darker + 0.05)
 }
+
 function hslToRgb(h: number, s: number, l: number): [number, number, number] {
   s = s / 100
   l = l / 100
@@ -70,6 +80,7 @@ function hslToRgb(h: number, s: number, l: number): [number, number, number] {
   }
   return [Math.round((r + m) * 255), Math.round((g + m) * 255), Math.round((b + m) * 255)]
 }
+
 function getAccessibleColor(h: number, s: number, l: number): string {
   const whiteLuminance = 1
   let currentL = l
@@ -82,6 +93,7 @@ function getAccessibleColor(h: number, s: number, l: number): string {
   }
   return "hsl(0, 0%, 0%)"
 }
+
 export function SpinningDots() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -294,6 +306,7 @@ export function SpinningDots() {
           transition: "transform 0.3s ease-out",
         }}
       >
+        {/* Outer ring 2x - 610px radius with motion blur */}
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1250px] h-[1250px] animate-spin-normal"
           style={{
@@ -306,13 +319,21 @@ export function SpinningDots() {
           {dots.map((dot, index) => (
             <div
               key={`outer-2x-${index}`}
-              className="absolute w-[15px] h-[15px] rounded-full left-1/2 top-1/2"
+              className="absolute w-[15px] h-[15px] rounded-full left-1/2 top-1/2 overflow-hidden"
               style={{
-                backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+                background: getDotGradient(dot.h, dot.s, dot.l),
                 transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(610px, 0) rotate(-${dot.angle}deg)`,
                 transformOrigin: "center",
               }}
-            />
+            >
+              <div
+                className={`absolute inset-0 rounded-full animate-gradient-shift-${index % 3}`}
+                style={{
+                  background: getDotGradient(dot.h, dot.s, dot.l),
+                  opacity: 0.8,
+                }}
+              />
+            </div>
           ))}
         </div>
 
@@ -328,16 +349,25 @@ export function SpinningDots() {
           {dots.map((dot, index) => (
             <div
               key={`outer-1.5x-${index}`}
-              className="absolute w-[15px] h-[15px] rounded-full left-1/2 top-1/2"
+              className="absolute w-[15px] h-[15px] rounded-full left-1/2 top-1/2 overflow-hidden"
               style={{
-                backgroundColor: `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+                background: getDotGradient(dot.h, dot.s, dot.l),
                 transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(457.5px, 0) rotate(-${dot.angle}deg)`,
                 transformOrigin: "center",
               }}
-            />
+            >
+              <div
+                className={`absolute inset-0 rounded-full animate-gradient-shift-${(index + 1) % 3}`}
+                style={{
+                  background: getDotGradient(dot.h, dot.s, dot.l),
+                  opacity: 0.8,
+                }}
+              />
+            </div>
           ))}
         </div>
 
+        {/* Main ring - 305px radius */}
         <div
           className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] ${hoveredIndex !== null || isCtaHovered ? "animate-spin-stopped" : "animate-spin-normal"}`}
           style={{
@@ -347,18 +377,28 @@ export function SpinningDots() {
           {dots.map((dot, index) => (
             <div
               key={index}
-              className="absolute w-[15px] h-[15px] rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer"
+              className="absolute w-[15px] h-[15px] rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer overflow-hidden"
               style={{
-                backgroundColor: isCtaHovered ? "#3168FF" : `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+                background: isCtaHovered ? "#3168FF" : getDotGradient(dot.h, dot.s, dot.l),
                 transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(${isCtaHovered ? "280px" : "305px"}, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
                 transformOrigin: "center",
                 opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
                 transition:
-                  "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 400ms ease-in-out",
+                  "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1), background 400ms ease-in-out",
               }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
-            />
+            >
+              {!isCtaHovered && (
+                <div
+                  className={`absolute inset-0 rounded-full animate-gradient-shift-${(index + 2) % 3}`}
+                  style={{
+                    background: getDotGradient(dot.h, dot.s, dot.l),
+                    opacity: 0.7,
+                  }}
+                />
+              )}
+            </div>
           ))}
         </div>
       </div>
