@@ -24,8 +24,8 @@ const dots = [
 ]
 
 function getDotGradient(h: number, s: number, l: number, hueShift = 0): string {
-  const darkL = Math.max(l - 5, 10)
-  const lightL = Math.min(l + 5, 90)
+  const darkL = Math.max(l - 3, 10)
+  const lightL = Math.min(l + 3, 90)
   const shiftedH = (h + hueShift) % 360
   return `linear-gradient(135deg, hsl(${shiftedH}, ${s}%, ${darkL}%), hsl(${shiftedH}, ${s}%, ${lightL}%))`
 }
@@ -331,10 +331,10 @@ export function SpinningDots() {
             filter: "url(#motionBlurStrong)",
           }}
         >
-          {[...Array(24)].map((_, index) => {
+          {[...Array(30)].map((_, index) => {
             const dotIndex = index % dots.length
             const dot = dots[dotIndex]
-            const angle = (360 / 24) * index
+            const angle = (360 / 30) * index
             return (
               <div
                 key={`outer-4th-${index}`}
@@ -366,10 +366,10 @@ export function SpinningDots() {
             filter: "url(#motionBlurMedium)",
           }}
         >
-          {[...Array(20)].map((_, index) => {
+          {[...Array(24)].map((_, index) => {
             const dotIndex = index % dots.length
             const dot = dots[dotIndex]
-            const angle = (360 / 20) * index
+            const angle = (360 / 24) * index
             return (
               <div
                 key={`outer-3rd-${index}`}
@@ -401,10 +401,10 @@ export function SpinningDots() {
             filter: "url(#motionBlurLight)",
           }}
         >
-          {[...Array(16)].map((_, index) => {
+          {[...Array(18)].map((_, index) => {
             const dotIndex = index % dots.length
             const dot = dots[dotIndex]
-            const angle = (360 / 16) * index
+            const angle = (360 / 18) * index
             return (
               <div
                 key={`outer-2nd-${index}`}
@@ -427,7 +427,6 @@ export function SpinningDots() {
           })}
         </div>
 
-        {/* Main ring - 305px radius, 15px dots, 12 dots total */}
         <div
           className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] ${hoveredIndex !== null || isCtaHovered ? "animate-spin-stopped" : "animate-spin-normal"}`}
           style={{
