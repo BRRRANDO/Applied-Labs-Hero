@@ -316,8 +316,8 @@ export function SpinningDots() {
           }}
         >
           {[...Array(48)].map((_, index) => {
-            const animationDelay = -(index * 0.25) // Stagger by 0.25s
-            const animationVariant = index % 3 // Cycle through 3 animation variants
+            const animationDelay = -(index * 0.4) // Adjusted stagger for longer animation
+            const animationVariant = index % 3
             return (
               <div
                 key={`outer-4th-${index}`}
@@ -325,7 +325,7 @@ export function SpinningDots() {
                 style={{
                   transform: `translate(-50%, -50%) rotate(${(360 / 48) * index}deg) translate(590px, 0) rotate(-${(360 / 48) * index}deg)`,
                   transformOrigin: "center",
-                  animation: `color-cycle-${animationVariant} 12s ease-in-out infinite`,
+                  animation: `color-cycle-${animationVariant} 20s ease-in-out infinite`,
                   animationDelay: `${animationDelay}s`,
                 }}
               />
@@ -343,7 +343,7 @@ export function SpinningDots() {
           }}
         >
           {[...Array(36)].map((_, index) => {
-            const animationDelay = -(index * 0.33) // Stagger by 0.33s
+            const animationDelay = -(index * 0.55) // Adjusted stagger for longer animation
             const animationVariant = index % 3
             return (
               <div
@@ -352,7 +352,7 @@ export function SpinningDots() {
                 style={{
                   transform: `translate(-50%, -50%) rotate(${(360 / 36) * index}deg) translate(495px, 0) rotate(-${(360 / 36) * index}deg)`,
                   transformOrigin: "center",
-                  animation: `color-cycle-${animationVariant} 12s ease-in-out infinite`,
+                  animation: `color-cycle-${animationVariant} 20s ease-in-out infinite`,
                   animationDelay: `${animationDelay}s`,
                 }}
               />
@@ -370,7 +370,7 @@ export function SpinningDots() {
           }}
         >
           {[...Array(24)].map((_, index) => {
-            const animationDelay = -(index * 0.5) // Stagger by 0.5s
+            const animationDelay = -(index * 0.8) // Adjusted stagger for longer animation
             const animationVariant = index % 3
             return (
               <div
@@ -379,7 +379,7 @@ export function SpinningDots() {
                 style={{
                   transform: `translate(-50%, -50%) rotate(${(360 / 24) * index}deg) translate(400px, 0) rotate(-${(360 / 24) * index}deg)`,
                   transformOrigin: "center",
-                  animation: `color-cycle-${animationVariant} 12s ease-in-out infinite`,
+                  animation: `color-cycle-${animationVariant} 20s ease-in-out infinite`,
                   animationDelay: `${animationDelay}s`,
                 }}
               />
@@ -394,7 +394,7 @@ export function SpinningDots() {
           }}
         >
           {dots.map((dot, index) => {
-            const animationDelay = -(index * 1) // Stagger by 1s for main ring
+            const animationDelay = -(index * 1.6) // Adjusted stagger for longer animation
             const animationVariant = index % 3
             return (
               <div
@@ -405,7 +405,7 @@ export function SpinningDots() {
                   transformOrigin: "center",
                   opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
                   background: isCtaHovered ? "#3168FF" : undefined,
-                  animation: isCtaHovered ? "none" : `color-cycle-${animationVariant} 12s ease-in-out infinite`,
+                  animation: isCtaHovered ? "none" : `color-cycle-${animationVariant} 20s ease-in-out infinite`,
                   animationDelay: `${animationDelay}s`,
                   transition:
                     "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1), background 500ms ease-in-out",
