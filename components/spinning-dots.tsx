@@ -24,8 +24,8 @@ const dots = [
 ]
 
 function getDotGradient(h: number, s: number, l: number): string {
-  const darkL = Math.max(l - 15, 10)
-  const lightL = Math.min(l + 15, 90)
+  const darkL = Math.max(l - 8, 10)
+  const lightL = Math.min(l + 8, 90)
   return `linear-gradient(135deg, hsl(${h}, ${s}%, ${darkL}%), hsl(${h}, ${s}%, ${lightL}%))`
 }
 
