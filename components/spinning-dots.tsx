@@ -399,15 +399,16 @@ export function SpinningDots() {
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              {!isCtaHovered && (
-                <div
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 2) + 10),
-                    animation: `gradient-hue-shift-${(index + 2) % 3} 4s ease-in-out infinite`,
-                  }}
-                />
-              )}
+              <div
+                className="absolute inset-0 rounded-full transition-opacity duration-400"
+                style={{
+                  background: isCtaHovered
+                    ? "#3168FF"
+                    : getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 2) + 10),
+                  animation: isCtaHovered ? "none" : `gradient-hue-shift-${(index + 2) % 3} 4s ease-in-out infinite`,
+                  opacity: isCtaHovered ? 0 : 1,
+                }}
+              />
             </div>
           ))}
         </div>
