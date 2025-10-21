@@ -23,10 +23,21 @@ const dots = [
   { angle: 330, h: 0, s: 0, l: 40, image: "/images/proactive-support.jpg", valueProposition: "Proactive Support" }, // Dark grey
 ]
 
-function getDotGradient(h: number, s: number, l: number): string {
-  const darkL = Math.max(l - 8, 10)
-  const lightL = Math.min(l + 8, 90)
-  return `linear-gradient(135deg, hsl(${h}, ${s}%, ${darkL}%), hsl(${h}, ${s}%, ${lightL}%))`
+function getDotGradient(h: number, s: number, l: number, hueShift = 0): string {
+  const darkL = Math.max(l - 5, 10)
+  const lightL = Math.min(l + 5, 90)
+  const shiftedH = (h + hueShift) % 360
+  return `linear-gradient(135deg, hsl(${shiftedH}, ${s}%, ${darkL}%), hsl(${shiftedH}, ${s}%, ${lightL}%))`
+}
+
+function getHueShift(index: number, variant: number): number {
+  // Create orderly but varied hue shifts: -10 to +10 degrees
+  const patterns = [
+    [0, 5, -5, 8, -8, 3, -3, 10, -10, 6, -6, 4],
+    [5, -5, 10, -10, 3, -3, 8, -8, 0, 6, -6, 4],
+    [10, -10, 5, -5, 8, -8, 0, 3, -3, 6, -6, 4],
+  ]
+  return patterns[variant % 3][index % 12]
 }
 
 function getLuminance(r: number, g: number, b: number): number {
@@ -320,16 +331,16 @@ export function SpinningDots() {
               key={`outer-2x-${index}`}
               className="absolute w-[15px] h-[15px] rounded-full left-1/2 top-1/2 overflow-hidden"
               style={{
-                background: getDotGradient(dot.h, dot.s, dot.l),
+                background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 0)),
                 transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(610px, 0) rotate(-${dot.angle}deg)`,
                 transformOrigin: "center",
               }}
             >
               <div
-                className={`absolute inset-0 rounded-full animate-gradient-shift-${index % 3}`}
+                className="absolute inset-0 rounded-full"
                 style={{
-                  background: getDotGradient(dot.h, dot.s, dot.l),
-                  opacity: 0.8,
+                  background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 0) + 10),
+                  animation: `gradient-hue-shift-${index % 3} 4s ease-in-out infinite`,
                 }}
               />
             </div>
@@ -350,16 +361,16 @@ export function SpinningDots() {
               key={`outer-1.5x-${index}`}
               className="absolute w-[15px] h-[15px] rounded-full left-1/2 top-1/2 overflow-hidden"
               style={{
-                background: getDotGradient(dot.h, dot.s, dot.l),
+                background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 1)),
                 transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(457.5px, 0) rotate(-${dot.angle}deg)`,
                 transformOrigin: "center",
               }}
             >
               <div
-                className={`absolute inset-0 rounded-full animate-gradient-shift-${(index + 1) % 3}`}
+                className="absolute inset-0 rounded-full"
                 style={{
-                  background: getDotGradient(dot.h, dot.s, dot.l),
-                  opacity: 0.8,
+                  background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 1) + 10),
+                  animation: `gradient-hue-shift-${(index + 1) % 3} 4s ease-in-out infinite`,
                 }}
               />
             </div>
@@ -378,7 +389,7 @@ export function SpinningDots() {
               key={index}
               className="absolute w-[15px] h-[15px] rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer overflow-hidden"
               style={{
-                background: isCtaHovered ? "#3168FF" : getDotGradient(dot.h, dot.s, dot.l),
+                background: isCtaHovered ? "#3168FF" : getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 2)),
                 transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(${isCtaHovered ? "280px" : "305px"}, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
                 transformOrigin: "center",
                 opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
@@ -390,10 +401,10 @@ export function SpinningDots() {
             >
               {!isCtaHovered && (
                 <div
-                  className={`absolute inset-0 rounded-full animate-gradient-shift-${(index + 2) % 3}`}
+                  className="absolute inset-0 rounded-full"
                   style={{
-                    background: getDotGradient(dot.h, dot.s, dot.l),
-                    opacity: 0.7,
+                    background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 2) + 10),
+                    animation: `gradient-hue-shift-${(index + 2) % 3} 4s ease-in-out infinite`,
                   }}
                 />
               )}
