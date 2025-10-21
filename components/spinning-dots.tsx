@@ -24,10 +24,9 @@ const dots = [
 ]
 
 function getDotGradient(h: number, s: number, l: number): string {
-  // Create darker and lighter versions within the same hue
-  const darkL = Math.max(l - 18, 10)
-  const lightL = Math.min(l + 18, 90)
-  return `radial-gradient(circle at 30% 30%, hsl(${h}, ${s}%, ${lightL}%), hsl(${h}, ${s}%, ${darkL}%))`
+  const darkL = Math.max(l - 15, 10)
+  const lightL = Math.min(l + 15, 90)
+  return `linear-gradient(135deg, hsl(${h}, ${s}%, ${darkL}%), hsl(${h}, ${s}%, ${lightL}%))`
 }
 
 function getLuminance(r: number, g: number, b: number): number {
