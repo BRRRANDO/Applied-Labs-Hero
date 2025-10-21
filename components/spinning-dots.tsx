@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 const dots = [
   { angle: 0, h: 213, s: 100, l: 51, image: "/images/customer-retention.jpg", valueProposition: "Customer Retention" }, // #036BFF Blue
   { angle: 30, h: 357, s: 100, l: 67, image: "/images/high-csat.jpg", valueProposition: "a 95%+ CSAT" }, // #FF5A5F Airbnb pink
-  { angle: 60, h: 38, s: 100, l: 52, image: "/images/instant-responses.jpg", valueProposition: "Instant Responses" }, // #FF9F0A Apple Watch Ultra orange
+  { angle: 60, h: 47, s: 100, l: 52, image: "/images/instant-responses.jpg", valueProposition: "Instant Responses" }, // #FFCA0A Orange
   { angle: 90, h: 145, s: 63, l: 49, image: "/images/24-7-support.jpg", valueProposition: "24/7 Support" }, // #34C759 Apple green
   { angle: 120, h: 0, s: 0, l: 60, image: "/images/reduced-costs.jpg", valueProposition: "Reduced Support Costs" }, // Grey
   {
@@ -17,7 +17,7 @@ const dots = [
     valueProposition: "Personalized Experiences",
   }, // #036BFF Blue
   { angle: 180, h: 357, s: 100, l: 67, image: "/images/multilingual.jpg", valueProposition: "Multilingual Support" }, // #FF5A5F Airbnb pink
-  { angle: 210, h: 38, s: 100, l: 52, image: "/images/smart-routing.jpg", valueProposition: "Smart Ticket Routing" }, // #FF9F0A Apple Watch Ultra orange
+  { angle: 210, h: 47, s: 100, l: 52, image: "/images/smart-routing.jpg", valueProposition: "Smart Ticket Routing" }, // #FFCA0A Orange
   { angle: 240, h: 145, s: 63, l: 49, image: "/images/upsell.jpg", valueProposition: "Upsell Opportunities" }, // #34C759 Apple green
   { angle: 270, h: 0, s: 0, l: 50, image: "/images/sentiment-analysis.jpg", valueProposition: "Sentiment Analysis" }, // Grey (darker)
   { angle: 300, h: 213, s: 100, l: 51, image: "/images/order-tracking.jpg", valueProposition: "Order Tracking" }, // #036BFF Blue
