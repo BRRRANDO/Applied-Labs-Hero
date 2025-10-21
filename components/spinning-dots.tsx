@@ -24,22 +24,6 @@ const dots = [
   { angle: 330, h: 0, s: 0, l: 55, image: "/images/proactive-support.jpg", valueProposition: "Proactive Support" }, // Grey (medium)
 ]
 
-function getDotGradient(h: number, s: number, l: number, hueShift = 0): string {
-  const darkL = Math.max(l - 3, 10)
-  const lightL = Math.min(l + 3, 90)
-  const shiftedH = (h + hueShift) % 360
-  return `linear-gradient(135deg, hsl(${shiftedH}, ${s}%, ${darkL}%), hsl(${shiftedH}, ${s}%, ${lightL}%))`
-}
-
-function getHueShift(index: number, variant: number): number {
-  const patterns = [
-    [0, 3, -3, 4, -4, 2, -2, 5, -5, 3, -3, 2],
-    [3, -3, 5, -5, 2, -2, 4, -4, 0, 3, -3, 2],
-    [5, -5, 3, -3, 4, -4, 0, 2, -2, 3, -3, 2],
-  ]
-  return patterns[variant % 3][index % 12]
-}
-
 function getLuminance(r: number, g: number, b: number): number {
   const [rs, gs, bs] = [r, g, b].map((c) => {
     const val = c / 255
@@ -332,27 +316,19 @@ export function SpinningDots() {
           }}
         >
           {[...Array(48)].map((_, index) => {
-            const dotIndex = index % dots.length
-            const dot = dots[dotIndex]
-            const angle = (360 / 48) * index
+            const animationDelay = -(index * 0.25) // Stagger by 0.25s
+            const animationVariant = index % 3 // Cycle through 3 animation variants
             return (
               <div
                 key={`outer-4th-${index}`}
-                className="absolute w-[8px] h-[8px] rounded-full left-1/2 top-1/2 overflow-hidden"
+                className="absolute w-[8px] h-[8px] rounded-full left-1/2 top-1/2"
                 style={{
-                  background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 0)),
-                  transform: `translate(-50%, -50%) rotate(${angle}deg) translate(590px, 0) rotate(-${angle}deg)`,
+                  transform: `translate(-50%, -50%) rotate(${(360 / 48) * index}deg) translate(590px, 0) rotate(-${(360 / 48) * index}deg)`,
                   transformOrigin: "center",
+                  animation: `color-cycle-${animationVariant} 12s ease-in-out infinite`,
+                  animationDelay: `${animationDelay}s`,
                 }}
-              >
-                <div
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 0) + 5),
-                    animation: `gradient-hue-shift-${dotIndex % 3} 4s ease-in-out infinite`,
-                  }}
-                />
-              </div>
+              />
             )
           })}
         </div>
@@ -367,27 +343,19 @@ export function SpinningDots() {
           }}
         >
           {[...Array(36)].map((_, index) => {
-            const dotIndex = index % dots.length
-            const dot = dots[dotIndex]
-            const angle = (360 / 36) * index
+            const animationDelay = -(index * 0.33) // Stagger by 0.33s
+            const animationVariant = index % 3
             return (
               <div
                 key={`outer-3rd-${index}`}
-                className="absolute w-[10px] h-[10px] rounded-full left-1/2 top-1/2 overflow-hidden"
+                className="absolute w-[10px] h-[10px] rounded-full left-1/2 top-1/2"
                 style={{
-                  background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 1)),
-                  transform: `translate(-50%, -50%) rotate(${angle}deg) translate(495px, 0) rotate(-${angle}deg)`,
+                  transform: `translate(-50%, -50%) rotate(${(360 / 36) * index}deg) translate(495px, 0) rotate(-${(360 / 36) * index}deg)`,
                   transformOrigin: "center",
+                  animation: `color-cycle-${animationVariant} 12s ease-in-out infinite`,
+                  animationDelay: `${animationDelay}s`,
                 }}
-              >
-                <div
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 1) + 5),
-                    animation: `gradient-hue-shift-${(dotIndex + 1) % 3} 4s ease-in-out infinite`,
-                  }}
-                />
-              </div>
+              />
             )
           })}
         </div>
@@ -402,27 +370,19 @@ export function SpinningDots() {
           }}
         >
           {[...Array(24)].map((_, index) => {
-            const dotIndex = index % dots.length
-            const dot = dots[dotIndex]
-            const angle = (360 / 24) * index
+            const animationDelay = -(index * 0.5) // Stagger by 0.5s
+            const animationVariant = index % 3
             return (
               <div
                 key={`outer-2nd-${index}`}
-                className="absolute w-[12px] h-[12px] rounded-full left-1/2 top-1/2 overflow-hidden"
+                className="absolute w-[12px] h-[12px] rounded-full left-1/2 top-1/2"
                 style={{
-                  background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 2)),
-                  transform: `translate(-50%, -50%) rotate(${angle}deg) translate(400px, 0) rotate(-${angle}deg)`,
+                  transform: `translate(-50%, -50%) rotate(${(360 / 24) * index}deg) translate(400px, 0) rotate(-${(360 / 24) * index}deg)`,
                   transformOrigin: "center",
+                  animation: `color-cycle-${animationVariant} 12s ease-in-out infinite`,
+                  animationDelay: `${animationDelay}s`,
                 }}
-              >
-                <div
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background: getDotGradient(dot.h, dot.s, dot.l, getHueShift(dotIndex, 2) + 5),
-                    animation: `gradient-hue-shift-${(dotIndex + 2) % 3} 4s ease-in-out infinite`,
-                  }}
-                />
-              </div>
+              />
             )
           })}
         </div>
@@ -433,36 +393,28 @@ export function SpinningDots() {
             transformOrigin: "50% 50%",
           }}
         >
-          {dots.map((dot, index) => (
-            <div
-              key={index}
-              className="absolute w-[15px] h-[15px] rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer overflow-hidden"
-              style={{
-                background: isCtaHovered
-                  ? "linear-gradient(135deg, #3168FF, #3168FF)"
-                  : getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 2)),
-                transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(${isCtaHovered ? "280px" : "305px"}, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
-                transformOrigin: "center",
-                opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
-                transition:
-                  "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1), background 500ms ease-in-out",
-              }}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
+          {dots.map((dot, index) => {
+            const animationDelay = -(index * 1) // Stagger by 1s for main ring
+            const animationVariant = index % 3
+            return (
               <div
-                className="absolute inset-0 rounded-full"
+                key={index}
+                className="absolute w-[15px] h-[15px] rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer"
                 style={{
-                  background: isCtaHovered
-                    ? "linear-gradient(135deg, #3168FF, #3168FF)"
-                    : getDotGradient(dot.h, dot.s, dot.l, getHueShift(index, 2) + 5),
-                  animation: isCtaHovered ? "none" : `gradient-hue-shift-${(index + 2) % 3} 4s ease-in-out infinite`,
-                  opacity: isCtaHovered ? 0 : 1,
-                  transition: "opacity 500ms ease-in-out, background 500ms ease-in-out",
+                  transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(${isCtaHovered ? "280px" : "305px"}, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
+                  transformOrigin: "center",
+                  opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
+                  background: isCtaHovered ? "#3168FF" : undefined,
+                  animation: isCtaHovered ? "none" : `color-cycle-${animationVariant} 12s ease-in-out infinite`,
+                  animationDelay: `${animationDelay}s`,
+                  transition:
+                    "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1), background 500ms ease-in-out",
                 }}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
               />
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
 
