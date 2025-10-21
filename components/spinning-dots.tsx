@@ -316,8 +316,15 @@ export function SpinningDots() {
           }}
         >
           {[...Array(48)].map((_, index) => {
-            const animationDelay = -(index * 0.4) // Adjusted stagger for longer animation
-            const animationVariant = index % 3
+            const colorIndex = index % 5
+            const colors = [
+              { h: 213, s: 100, l: 51 }, // Blue
+              { h: 357, s: 100, l: 67 }, // Pink
+              { h: 47, s: 100, l: 49 }, // Yellow
+              { h: 145, s: 63, l: 49 }, // Green
+              { h: 0, s: 0, l: 60 }, // Grey
+            ]
+            const color = colors[colorIndex]
             return (
               <div
                 key={`outer-4th-${index}`}
@@ -325,8 +332,7 @@ export function SpinningDots() {
                 style={{
                   transform: `translate(-50%, -50%) rotate(${(360 / 48) * index}deg) translate(590px, 0) rotate(-${(360 / 48) * index}deg)`,
                   transformOrigin: "center",
-                  animation: `color-cycle-${animationVariant} 20s ease-in-out infinite`,
-                  animationDelay: `${animationDelay}s`,
+                  background: `hsl(${color.h}, ${color.s}%, ${color.l}%)`,
                 }}
               />
             )
@@ -343,8 +349,15 @@ export function SpinningDots() {
           }}
         >
           {[...Array(36)].map((_, index) => {
-            const animationDelay = -(index * 0.55) // Adjusted stagger for longer animation
-            const animationVariant = index % 3
+            const colorIndex = index % 5
+            const colors = [
+              { h: 213, s: 100, l: 51 }, // Blue
+              { h: 357, s: 100, l: 67 }, // Pink
+              { h: 47, s: 100, l: 49 }, // Yellow
+              { h: 145, s: 63, l: 49 }, // Green
+              { h: 0, s: 0, l: 60 }, // Grey
+            ]
+            const color = colors[colorIndex]
             return (
               <div
                 key={`outer-3rd-${index}`}
@@ -352,8 +365,7 @@ export function SpinningDots() {
                 style={{
                   transform: `translate(-50%, -50%) rotate(${(360 / 36) * index}deg) translate(495px, 0) rotate(-${(360 / 36) * index}deg)`,
                   transformOrigin: "center",
-                  animation: `color-cycle-${animationVariant} 20s ease-in-out infinite`,
-                  animationDelay: `${animationDelay}s`,
+                  background: `hsl(${color.h}, ${color.s}%, ${color.l}%)`,
                 }}
               />
             )
@@ -370,8 +382,15 @@ export function SpinningDots() {
           }}
         >
           {[...Array(24)].map((_, index) => {
-            const animationDelay = -(index * 0.8) // Adjusted stagger for longer animation
-            const animationVariant = index % 3
+            const colorIndex = index % 5
+            const colors = [
+              { h: 213, s: 100, l: 51 }, // Blue
+              { h: 357, s: 100, l: 67 }, // Pink
+              { h: 47, s: 100, l: 49 }, // Yellow
+              { h: 145, s: 63, l: 49 }, // Green
+              { h: 0, s: 0, l: 60 }, // Grey
+            ]
+            const color = colors[colorIndex]
             return (
               <div
                 key={`outer-2nd-${index}`}
@@ -379,8 +398,7 @@ export function SpinningDots() {
                 style={{
                   transform: `translate(-50%, -50%) rotate(${(360 / 24) * index}deg) translate(400px, 0) rotate(-${(360 / 24) * index}deg)`,
                   transformOrigin: "center",
-                  animation: `color-cycle-${animationVariant} 20s ease-in-out infinite`,
-                  animationDelay: `${animationDelay}s`,
+                  background: `hsl(${color.h}, ${color.s}%, ${color.l}%)`,
                 }}
               />
             )
@@ -394,8 +412,6 @@ export function SpinningDots() {
           }}
         >
           {dots.map((dot, index) => {
-            const animationDelay = -(index * 1.6) // Adjusted stagger for longer animation
-            const animationVariant = index % 3
             return (
               <div
                 key={index}
@@ -404,9 +420,7 @@ export function SpinningDots() {
                   transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(${isCtaHovered ? "280px" : "305px"}, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
                   transformOrigin: "center",
                   opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
-                  background: isCtaHovered ? "#3168FF" : undefined,
-                  animation: isCtaHovered ? "none" : `color-cycle-${animationVariant} 20s ease-in-out infinite`,
-                  animationDelay: `${animationDelay}s`,
+                  background: isCtaHovered ? "#3168FF" : `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
                   transition:
                     "opacity 500ms ease-in-out, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1), background 500ms ease-in-out",
                 }}
