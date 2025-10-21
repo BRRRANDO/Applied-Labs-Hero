@@ -307,7 +307,7 @@ export function SpinningDots() {
         }}
       >
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1220px] h-[1220px] animate-spin-normal"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1220px] h-[1220px] animate-spin-normal z-10"
           style={{
             transformOrigin: "50% 50%",
             opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.08,
@@ -341,7 +341,7 @@ export function SpinningDots() {
         </div>
 
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1030px] h-[1030px] animate-spin-normal"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1030px] h-[1030px] animate-spin-normal z-20"
           style={{
             transformOrigin: "50% 50%",
             opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.12,
@@ -375,7 +375,7 @@ export function SpinningDots() {
         </div>
 
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[840px] h-[840px] animate-spin-normal"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[840px] h-[840px] animate-spin-normal z-30"
           style={{
             transformOrigin: "50% 50%",
             opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.18,
@@ -398,7 +398,7 @@ export function SpinningDots() {
                 key={`outer-2nd-${index}`}
                 className="absolute w-[12px] h-[12px] rounded-full left-1/2 top-1/2"
                 style={{
-                  transform: `translate(-50%, -50%) rotate(${(360 / 24) * index}deg) translate(${isCtaHovered ? "280px" : "305px"}, 0) rotate(-${(360 / 24) * index}deg)`,
+                  transform: `translate(-50%, -50%) rotate(${(360 / 24) * index}deg) translate(${isCtaHovered ? "360px" : "400px"}, 0) rotate(-${(360 / 24) * index}deg)`,
                   transformOrigin: "center",
                   background: `hsl(${color.h}, ${color.s}%, ${color.l}%)`,
                   opacity: 0.8,
@@ -409,7 +409,7 @@ export function SpinningDots() {
         </div>
 
         <div
-          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] ${hoveredIndex !== null || isCtaHovered ? "animate-spin-stopped" : "animate-spin-normal"}`}
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] z-40 ${hoveredIndex !== null || isCtaHovered ? "animate-spin-stopped" : "animate-spin-normal"}`}
           style={{
             transformOrigin: "50% 50%",
           }}
