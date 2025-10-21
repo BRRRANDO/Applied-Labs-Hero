@@ -2,25 +2,25 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 const dots = [
-  { angle: 0, h: 30, s: 65, l: 70, image: "/images/customer-retention.jpg", valueProposition: "Customer Retention" }, // Vivid peach/tan
-  { angle: 30, h: 340, s: 50, l: 72, image: "/images/high-csat.jpg", valueProposition: "a 95%+ CSAT" }, // Vivid dusty rose
-  { angle: 60, h: 45, s: 70, l: 65, image: "/images/instant-responses.jpg", valueProposition: "Instant Responses" }, // Vivid golden tan
-  { angle: 90, h: 160, s: 45, l: 65, image: "/images/24-7-support.jpg", valueProposition: "24/7 Support" }, // Vivid sage green
-  { angle: 120, h: 25, s: 60, l: 68, image: "/images/reduced-costs.jpg", valueProposition: "Reduced Support Costs" }, // Vivid warm beige
+  { angle: 0, h: 25, s: 95, l: 55, image: "/images/customer-retention.jpg", valueProposition: "Customer Retention" }, // Vibrant orange
+  { angle: 30, h: 355, s: 85, l: 55, image: "/images/high-csat.jpg", valueProposition: "a 95%+ CSAT" }, // Vibrant red
+  { angle: 60, h: 48, s: 95, l: 55, image: "/images/instant-responses.jpg", valueProposition: "Instant Responses" }, // Vibrant yellow
+  { angle: 90, h: 145, s: 75, l: 45, image: "/images/24-7-support.jpg", valueProposition: "24/7 Support" }, // Vibrant green
+  { angle: 120, h: 185, s: 85, l: 50, image: "/images/reduced-costs.jpg", valueProposition: "Reduced Support Costs" }, // Vibrant cyan
   {
     angle: 150,
-    h: 200,
-    s: 40,
-    l: 65,
+    h: 213,
+    s: 99,
+    l: 51,
     image: "/images/personalization.jpg",
     valueProposition: "Personalized Experiences",
-  }, // Vivid blue-gray
-  { angle: 180, h: 15, s: 70, l: 70, image: "/images/multilingual.jpg", valueProposition: "Multilingual Support" }, // Vivid coral/orange
-  { angle: 210, h: 350, s: 45, l: 72, image: "/images/smart-routing.jpg", valueProposition: "Smart Ticket Routing" }, // Vivid soft pink
-  { angle: 240, h: 0, s: 0, l: 65, image: "/images/upsell.jpg", valueProposition: "Upsell Opportunities" }, // Gray (unchanged)
-  { angle: 270, h: 190, s: 50, l: 63, image: "/images/sentiment-analysis.jpg", valueProposition: "Sentiment Analysis" }, // Vivid light blue
-  { angle: 300, h: 65, s: 55, l: 63, image: "/images/order-tracking.jpg", valueProposition: "Order Tracking" }, // Vivid olive/yellow-green
-  { angle: 330, h: 20, s: 35, l: 63, image: "/images/proactive-support.jpg", valueProposition: "Proactive Support" }, // Vivid taupe
+  }, // Vibrant blue #036BFF
+  { angle: 180, h: 330, s: 85, l: 60, image: "/images/multilingual.jpg", valueProposition: "Multilingual Support" }, // Vibrant pink/magenta
+  { angle: 210, h: 270, s: 75, l: 55, image: "/images/smart-routing.jpg", valueProposition: "Smart Ticket Routing" }, // Vibrant purple
+  { angle: 240, h: 15, s: 90, l: 58, image: "/images/upsell.jpg", valueProposition: "Upsell Opportunities" }, // Vibrant coral
+  { angle: 270, h: 200, s: 80, l: 48, image: "/images/sentiment-analysis.jpg", valueProposition: "Sentiment Analysis" }, // Vibrant blue-cyan
+  { angle: 300, h: 85, s: 85, l: 50, image: "/images/order-tracking.jpg", valueProposition: "Order Tracking" }, // Vibrant lime green
+  { angle: 330, h: 40, s: 92, l: 52, image: "/images/proactive-support.jpg", valueProposition: "Proactive Support" }, // Vibrant golden yellow
 ]
 function getLuminance(r: number, g: number, b: number): number {
   const [rs, gs, bs] = [r, g, b].map((c) => {
@@ -181,6 +181,14 @@ export function SpinningDots() {
       style={{ background: "white", transition: "background 600ms ease-in-out" }}
       onMouseMove={handleMouseMove}
     >
+      <svg width="0" height="0" style={{ position: "absolute" }}>
+        <defs>
+          <filter id="motion-blur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2,0" />
+          </filter>
+        </defs>
+      </svg>
+
       {hoveredIndex !== null && (
         <div
           className="absolute inset-0 transition-opacity duration-[600ms] ease-in-out"
@@ -197,7 +205,7 @@ export function SpinningDots() {
         <div className="flex items-center justify-between text-sm">
           <div
             className="font-decimal text-[15px] font-medium leading-[130%] transition-colors duration-500 ease-out"
-            style={{ color: isCtaHovered ? "#3168FF" : textColor }}
+            style={{ color: isCtaHovered ? "#036BFF" : textColor }}
           >
             APPLIED LABS
           </div>
@@ -220,7 +228,7 @@ export function SpinningDots() {
           <div
             className="font-decimal text-[15px] font-medium leading-[130%] transition-opacity duration-500 ease-out cursor-pointer"
             style={{
-              color: isNavButtonHovered ? "#3168FF" : textColor,
+              color: isNavButtonHovered ? "#036BFF" : textColor,
               transition: "color 400ms ease-in-out, opacity 500ms ease-out",
               opacity: hoveredIndex !== null ? 0 : isCtaHovered ? 0.2 : 1,
             }}
@@ -258,7 +266,7 @@ export function SpinningDots() {
           style={{
             padding: "10px 20px 11px 20px",
             borderRadius: "4px",
-            background: isMainButtonHovered ? "#3168FF" : hoveredIndex !== null ? textColor : "#000000",
+            background: isMainButtonHovered ? "#036BFF" : hoveredIndex !== null ? textColor : "#000000",
             color: "#FFFFFF",
             display: "inline-flex",
             justifyContent: "center",
@@ -293,6 +301,7 @@ export function SpinningDots() {
             transformOrigin: "50% 50%",
             opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.05,
             transition: "opacity 500ms ease-out",
+            filter: "url(#motion-blur)", // Added motion blur filter
           }}
         >
           {dots.map((dot, index) => (
@@ -315,6 +324,7 @@ export function SpinningDots() {
             transformOrigin: "50% 50%",
             opacity: hoveredIndex !== null || isCtaHovered ? 0 : 0.2,
             transition: "opacity 500ms ease-out",
+            filter: "url(#motion-blur)", // Added motion blur filter
           }}
         >
           {dots.map((dot, index) => (
@@ -335,6 +345,7 @@ export function SpinningDots() {
           className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] ${hoveredIndex !== null || isCtaHovered ? "animate-spin-stopped" : "animate-spin-normal"}`}
           style={{
             transformOrigin: "50% 50%",
+            filter: hoveredIndex !== null || isCtaHovered ? "none" : "url(#motion-blur)", // Added conditional motion blur
           }}
         >
           {dots.map((dot, index) => (
@@ -342,7 +353,7 @@ export function SpinningDots() {
               key={index}
               className="absolute w-5 h-5 rounded-full left-1/2 top-1/2 transition-all duration-500 hover:brightness-90 cursor-pointer"
               style={{
-                backgroundColor: isCtaHovered ? "#3168FF" : `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`,
+                backgroundColor: isCtaHovered ? "#036BFF" : `hsl(${dot.h}, ${dot.s}%, ${dot.l}%)`, // Updated CTA hover color to match new blue
                 transform: `translate(-50%, -50%) rotate(${dot.angle}deg) translate(${isCtaHovered ? "280px" : "305px"}, 0) rotate(-${dot.angle}deg) ${hoveredIndex !== null && hoveredIndex !== index ? "scale(0.4)" : "scale(1)"}`,
                 transformOrigin: "center",
                 opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.2 : 1,
